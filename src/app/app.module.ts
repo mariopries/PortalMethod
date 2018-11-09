@@ -1,16 +1,59 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { MatFormFieldModule, MatSelectModule, MatInputModule, MatCardModule } from "@angular/material/";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserModule } from "@angular/platform-browser";
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from "@angular/common/http";
+import { NgModule, Injector } from "@angular/core";
 
-import { AppComponent } from './app.component';
+import { AppComponent } from "./app.component";
+import { TesteComponent } from "./telas/teste/teste.component";
+import { DeveloperMenuComponent } from "./telas/developer-menu/developer-menu.component";
+import { NavbarComponent } from "./navbar/navbar.component";
+import { LayoutModule } from "@angular/cdk/layout";
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatRadioModule } from "@angular/material";
+import { ToolbarComponent } from "./toolbar/toolbar.component";
+import { appRoutes } from "./app.routing";
+import { RouterModule } from "@angular/router";
+import { ZoopHeaderInterceptor } from "./zoop/services/zoop-header-interceptor.service";
+import { ZoopErrorInterceptor } from "./zoop/services/zoop-error-interceptor.service";
+import { CardModule } from 'ngx-card/ngx-card';
+import { TesteFormComponent } from './teste-form/teste-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { VendedoresComponent } from './telas/vendedores/vendedores.component';
+
+export let Client: HttpClient;
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent, TesteComponent, DeveloperMenuComponent, NavbarComponent, ToolbarComponent, TesteFormComponent, VendedoresComponent],
   imports: [
-    BrowserModule
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: false, useHash: false } // <-- debugging purposes only
+    ),
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatCardModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    CardModule,
+    MatRadioModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ZoopErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ZoopHeaderInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private injector: Injector) {
+    Client = this.injector.get<HttpClient>(HttpClient);
+  }
+}

@@ -1,0 +1,9 @@
+mat-toolbar {
+  position: absolute;
+  top: 0;
+  z-index: 100;
+}
+
+.mat-elevation-z8 {
+  z-index: 100;
+}

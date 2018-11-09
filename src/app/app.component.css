@@ -1,0 +1,9 @@
+body {
+  background-color: rgb(242, 244, 245);
+  height: 100%;
+}
+.content {
+  top: 64px;
+  position: relative;
+  min-height: 100%;
+}
