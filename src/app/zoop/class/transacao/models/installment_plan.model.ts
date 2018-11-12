@@ -1,8 +1,8 @@
-import { EMode } from "src/app/zoop/enums/mode.enum";
+import { ETransacaoMode } from "src/app/zoop/enums/transacao.mode.enum";
 
 export interface IInstallmentPlan{
 
-    mode?:                  EMode;
+    mode?:                  ETransacaoMode;
     number_installments?:   number;
 
 }

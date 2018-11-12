@@ -1,4 +1,4 @@
-export enum EType {
+export enum ESourceType {
   wallet          = "wallet",
   card            = "card",
   card_and_wallet = "card_and_wallet",
