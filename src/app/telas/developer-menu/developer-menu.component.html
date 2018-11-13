@@ -36,21 +36,21 @@
         <p><strong>Lorem ipsum dolor sit amet.</strong></p>
       </div>
       <div class="picture"><img src="https://picsum.photos/260/200/?random" /></div>
-      <mat-card class="one-item">
+      <mat-card class="one-item" *ngFor="let item of precosIndividuais; let i=index">
         <div class="item-content">
           <p class="row">
             <span class="line">
-              <span class="col left"><strong>Descrição:</strong></span> <span class="col right">{{ names | titlecase }}</span>
+              <span class="col left"><strong>Descrição:</strong></span> <span class="col right">{{ names[i] | titlecase }}</span>
             </span>
           </p>
           <p class="row">
             <span class="line">
-              <span class="col left"><strong>Preço:</strong></span> <span class="col right">{{ precoTotal | money }}</span>
+              <span class="col left"><strong>Preço:</strong></span> <span class="col right">{{ precosIndividuais[i] | money }}</span>
             </span>
           </p>
           <p class="row">
             <span class="line">
-              <span class="col left"><strong>Quantidade:</strong></span> <span class="col right">{{ quantidade | number: "1.3-3" | numero }}</span>
+              <span class="col left"><strong>Quantidade:</strong></span> <span class="col right">{{ quantidades[i] | number: "1.3-3" | numero }}</span>
             </span>
           </p>
         </div>

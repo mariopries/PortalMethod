@@ -16,8 +16,9 @@ import { Client } from "src/app/app.module";
 })
 export class DeveloperMenuComponent implements OnInit {
   public baseForm: FormGroup;
-  public precoTotal = Math.floor(Math.random() * 1000);
-  public quantidade = Math.floor(Math.random() * 100000);
+  public precosIndividuais = new Array();
+  public precoTotal = 0;
+  public quantidades = new Array();
   public names = new Array();
   constructor(fb: FormBuilder) {
     this.baseForm = fb.group({
@@ -32,7 +33,14 @@ export class DeveloperMenuComponent implements OnInit {
   ngOnInit() {
     for (let index = 0; index < 30; index++) {
       this.names.push(this.getName());
+      this.precosIndividuais.push(Math.random() * 10);
+      this.quantidades.push(Math.floor(Math.random() * 100));
     }
+    let resultado = 0;
+    this.precosIndividuais.forEach((valor, index) => {
+      resultado += valor * 100 * this.quantidades[index];
+    });
+    this.precoTotal = resultado;
     this.init();
     // this.names.push(this.getName());
   }
@@ -73,6 +81,7 @@ export class DeveloperMenuComponent implements OnInit {
           number_installments: 6
         }
       };
+      console.log(transacao.amount);
       const result = await Transacao.CriarCartaoNaoPresente(transacao).toPromise();
       console.log(result);
     }
