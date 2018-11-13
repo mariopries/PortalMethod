@@ -1,4 +1,4 @@
-export enum EVendedorType{
+export enum EVendedorType {
     individual  = "individual",
     business    = "business",
 }

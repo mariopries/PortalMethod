@@ -1,4 +1,4 @@
-export enum EVendedorStatus{
+export enum EVendedorStatus {
 
     new             = "new",
     expired         = "expired",
@@ -8,5 +8,5 @@ export enum EVendedorStatus{
     active          = "active",
     disabled        = "disabled",
     deleted         = "deleted",
-    
+
 }

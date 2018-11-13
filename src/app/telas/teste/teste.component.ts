@@ -31,10 +31,10 @@ export class TesteComponent implements OnInit {
 
     const comprador = new Comprador();
     const costumer = <IComprador>{
-      first_name:"Mario",
-      last_name:"Testes",
-      taxpayer_id:"40186147058"
-    }
+      first_name: "Mario",
+      last_name: "Testes",
+      taxpayer_id: "40186147058"
+    };
 
     this.costumer = await comprador.CriarComprador(costumer).toPromise();
     console.log(this.costumer);
@@ -49,15 +49,15 @@ export class TesteComponent implements OnInit {
       payment_method: {
         expiration_date: "20181112",
         top_instructions: ["Testes", "Testando 2312312"]
-      }      
-    }
+      }
+    };
 
     const result = await transacao.CriaTransacao(boleto).toPromise();
     console.log(result);
     window.location.href = result.payment_method.url;
   }
 
-  public async credito(){
+  public async credito() {
 
     const token = new Token();
     const card = <ICard>{

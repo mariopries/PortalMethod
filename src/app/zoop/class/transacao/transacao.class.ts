@@ -14,10 +14,10 @@ export class Transacao {
 
   }
 
-  public CriaTransacao(transacao: ITransacao){
+  public CriaTransacao(transacao: ITransacao) {
 
     return Client.post<ITransacao>(`https://api.zoop.ws/v1/marketplaces/${MARKETPLACE_ID}/transactions`, JSON.stringify(transacao));
-    
+
   }
 
 }

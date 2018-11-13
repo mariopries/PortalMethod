@@ -35,6 +35,8 @@
     "@angular/cli": "^7.0.4",
     "@angular/compiler-cli": "^7.0.3",
     "@angular/language-service": "^7.0.3",
+    "@fnando/cnpj": "^0.1.1",
+    "@fnando/cpf": "^0.1.1",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",

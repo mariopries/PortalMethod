@@ -8,7 +8,7 @@ export class ZoopErrorInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError(error => {
       console.log(error);
-      return throwError(error);
+      return of(error);
     }));
   }
 }

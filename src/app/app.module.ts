@@ -19,11 +19,12 @@ import { CardModule } from 'ngx-card/ngx-card';
 import { TesteFormComponent } from './teste-form/teste-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { VendedoresComponent } from './telas/vendedores/vendedores.component';
+import { HomeComponent } from './telas/home/home.component';
 
 export let Client: HttpClient;
 
 @NgModule({
-  declarations: [AppComponent, TesteComponent, DeveloperMenuComponent, NavbarComponent, ToolbarComponent, TesteFormComponent, VendedoresComponent],
+  declarations: [AppComponent, TesteComponent, DeveloperMenuComponent, NavbarComponent, ToolbarComponent, TesteFormComponent, VendedoresComponent, HomeComponent],
   imports: [
     RouterModule.forRoot(
       appRoutes,
