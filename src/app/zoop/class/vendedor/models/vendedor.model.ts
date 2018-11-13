@@ -25,7 +25,6 @@ export abstract class IVendedor<T> {
 }
 
 export abstract class IIndividuo extends IVendedor<EVendedorType.individual> {
-    // -- Elementos de vendedor do tipo indivíduo
     readonly type =        EVendedorType.individual;
     first_name:            string;             // Contém o primeiro nome do vendedor
     last_name:             string;             // Contém o sobrenome do vendedor
@@ -37,11 +36,9 @@ export abstract class IIndividuo extends IVendedor<EVendedorType.individual> {
     facebook:              string;             // ID do Facebook ou nome de usuário do vendedor ou representante do negócio.
     twitter:               string;             // ID do Twitter ou nome de usuário do vendedor ou representante do negócio
     is_mobile:             boolean;            // Seja ou não o negócio móvel.
-    // -- Fim elementos de vendedor do tipo indivíduo
 }
 
 export abstract class IEmpresa extends IVendedor<EVendedorType.business> {
-    // -- Elementos de vendedor do tipo empresa
     readonly type =        EVendedorType.individual;
     owner:                 IOwner;
     business_name:         string;
@@ -55,5 +52,4 @@ export abstract class IEmpresa extends IVendedor<EVendedorType.business> {
     business_address:      IBusinessAddress;
     owner_address:         IOwnerAddress;
     delinquent:            boolean;
-    // -- Fim elementos de vendedor do tipo empresa
 }

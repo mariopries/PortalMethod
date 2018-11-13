@@ -3,7 +3,7 @@ import { IAddress } from "../../vendedor/models/address.model";
 import { ICard } from "../../transacao/models/card.model";
 import { IBankAccount } from "src/app/zoop/models/bankaccount.model";
 
-export interface IComprador {
+export abstract class IComprador {
   id: string;                                                       //Identificador único do comprador
   resource: string;                                                 //Valor: buyer
   description: string;                                              //Campo livre contendo a descrição do comprador

@@ -17,12 +17,41 @@ mat-card {
   flex-direction: column;
   flex-grow: 1;
   min-width: 520px;
-  min-height: 515px;
+  height: calc(100% - 64px);
   margin: 20px;
   padding: 20px;
   /* justify-content: space-around; */
   /* width: calc((100% - 120px)/3); */
   padding-bottom: 0px;
+  align-items: stretch;
+  overflow: auto;
+}
+
+.picture {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.title {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+.line {
+  width: 100%;
+  display: flex;
+}
+
+.one-item {
+  margin-top: 20px;
 }
 
 .info-produto {
@@ -30,7 +59,11 @@ mat-card {
   margin: 20px;
   padding: 20px;
   flex-basis: 25%;
+  min-width: 300px;
   position: relative;
+  justify-content: space-around;
+  flex-direction: column;
+  height: calc(100% - 84px);
 }
 
 .card-container {
@@ -55,8 +88,21 @@ mat-card {
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: nowrap;
-  min-height: 100%;
   align-items: stretch;
+}
+
+.buttons {
+  padding: 20px;
+}
+
+.buttons > * {
+  margin: 20px 20px;
+}
+
+.middle-col {
+  display: flex;
+  justify-content: space-around;
+  flex: 1;
 }
 
 .col {

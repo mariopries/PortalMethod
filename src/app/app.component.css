@@ -5,5 +5,5 @@ body {
 .content {
   top: 64px;
   position: relative;
-  min-height: 100%;
+  height: calc(100% - 64px);
 }

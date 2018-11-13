@@ -8,13 +8,13 @@ export class Transacao {
 
   constructor() { }
 
-  public CriarCartaoNaoPresente(cartaoNaoPresente: ICartaoNaoPresente) {
+  public static CriarCartaoNaoPresente(cartaoNaoPresente: ICartaoNaoPresente) {
 
     return Client.post<ITransacao>(`https://api.zoop.ws/v1/marketplaces/${MARKETPLACE_ID}/transactions`, JSON.stringify(cartaoNaoPresente));
 
   }
 
-  public CriaTransacao(transacao: ITransacao) {
+  public static CriaTransacao(transacao: ITransacao) {
 
     return Client.post<ITransacao>(`https://api.zoop.ws/v1/marketplaces/${MARKETPLACE_ID}/transactions`, JSON.stringify(transacao));
 

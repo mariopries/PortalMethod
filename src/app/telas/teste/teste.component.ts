@@ -29,17 +29,21 @@ export class TesteComponent implements OnInit {
 
   public async init() {
 
+    const documento = "07400221990";
     const comprador = new Comprador();
-    const costumer = <IComprador>{
-      first_name: "Mario",
-      last_name: "Testes",
-      taxpayer_id: "40186147058"
-    };
 
-    this.costumer = await comprador.CriarComprador(costumer).toPromise();
-    console.log(this.costumer);
+    comprador.BuscaComprador(documento);
 
-    const transacao = new Transacao();
+    if (!documento) {
+      this.costumer = <IComprador>{
+        first_name: "Mario",
+        last_name: "Testes",
+        taxpayer_id: "40186147058"
+      };
+    }
+
+    this.costumer = await comprador.CriarComprador(this.costumer).toPromise();
+
     const boleto = <ITransacao>{
       amount: 2000,
       payment_type: ETransacaoPaymentType.boleto,
@@ -52,7 +56,7 @@ export class TesteComponent implements OnInit {
       }
     };
 
-    const result = await transacao.CriaTransacao(boleto).toPromise();
+    const result = await Transacao.CriaTransacao(boleto).toPromise();
     console.log(result);
     window.location.href = result.payment_method.url;
   }
@@ -67,7 +71,7 @@ export class TesteComponent implements OnInit {
       holder_name: "José Inacio",
       security_code: "123"
     };
-    this.tokenCartao = await token.CriarTokenCartao(card).toPromise();
+    this.tokenCartao = await Token.CriarTokenCartao(card).toPromise();
     console.log(this.tokenCartao);
 
     this.transaction();
@@ -91,7 +95,7 @@ export class TesteComponent implements OnInit {
       }
     };
 
-    const result = await transacao.CriarCartaoNaoPresente(cartaoNaoPresente).toPromise();
+    const result = await Transacao.CriarCartaoNaoPresente(cartaoNaoPresente).toPromise();
     console.log(result);
 
   }

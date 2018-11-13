@@ -7,7 +7,7 @@ export class Token {
 
   constructor() {}
 
-  public CriarTokenCartao(cartao: ICard) {
+  public static CriarTokenCartao(cartao: ICard) {
 
     return Client.post<IToken>(`https://api.zoop.ws/v1/marketplaces/${MARKETPLACE_ID}/cards/tokens`, JSON.stringify(cartao));
 

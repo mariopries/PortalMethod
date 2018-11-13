@@ -20,11 +20,15 @@ import { TesteFormComponent } from './teste-form/teste-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { VendedoresComponent } from './telas/vendedores/vendedores.component';
 import { HomeComponent } from './telas/home/home.component';
+import { UppercaseDirective } from './directives/uppercase.directive';
+import { CurrencyPipe } from "@angular/common";
+import { MoneyPipe } from './pipes/money.pipe';
+import { NumeroPipe } from './pipes/numero.pipe';
 
 export let Client: HttpClient;
 
 @NgModule({
-  declarations: [AppComponent, TesteComponent, DeveloperMenuComponent, NavbarComponent, ToolbarComponent, TesteFormComponent, VendedoresComponent, HomeComponent],
+  declarations: [AppComponent, TesteComponent, DeveloperMenuComponent, NavbarComponent, ToolbarComponent, TesteFormComponent, VendedoresComponent, HomeComponent, UppercaseDirective, MoneyPipe, NumeroPipe],
   imports: [
     RouterModule.forRoot(
       appRoutes,
@@ -50,6 +54,7 @@ export let Client: HttpClient;
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ZoopErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ZoopHeaderInterceptor, multi: true },
+    CurrencyPipe,
   ],
   bootstrap: [AppComponent]
 })
