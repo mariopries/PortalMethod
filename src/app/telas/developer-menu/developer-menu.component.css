@@ -61,7 +61,7 @@ mat-card {
 .info-produto {
   display: flex;
   margin: 20px;
-  padding: 10px;
+  padding: 20px;
   flex-basis: 25%;
   min-width: 300px;
   position: relative;

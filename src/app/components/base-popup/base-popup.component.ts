@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-base-popup',
@@ -7,9 +8,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasePopupComponent implements OnInit {
 
-  constructor() { }
+  @Output('Closed') Closed = new EventEmitter();
+  description: any;
+  title: any;
 
-  ngOnInit() {
+  constructor(
+    public dialogRef: MatDialogRef<BasePopupComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.description = data.description;
+    this.title = data.title;
   }
 
+  ngOnInit() {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  /**
+   * close
+   */
+  public close() {
+    this.Closed.emit();
+    this.dialogRef.close();
+  }
+
+  /**
+   * save
+   */
+  public save() {}
 }

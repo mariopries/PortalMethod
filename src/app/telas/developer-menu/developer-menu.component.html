@@ -1,39 +1,40 @@
 <div class="row" style="height: 100%">
+  <app-loading #loading></app-loading>
   <mat-card class="info-principal">
     <perfect-scrollbar>
-      <form [formGroup]="baseForm">
-        <div class="example-container col" card container=".card-container" card-width="350" formatting="false" debug="true"
-          [placeholders]="{ name: 'Nome Completo' }">
+      <form
+        [formGroup]="baseForm">
+        <div class="example-container col">
           <mat-form-field appearance="outline">
             <mat-label>Número do Cartão</mat-label> <input formControlName="cardNumber" matInput placeholder="Número do Cartão"
-              card-number />
+              name="number" />
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Primeiro Nome</mat-label> <input appUppercase formControlName="cardFirstName" matInput
-              placeholder="Primeiro Nome" card-name />
+              placeholder="Primeiro Nome" name="first-name" />
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Sobrenome</mat-label> <input appUppercase formControlName="cardLastName" matInput placeholder="Sobrenome"
-              card-name />
+              name="last-name" />
           </mat-form-field>
           <div class="row">
             <div class="field">
               <mat-form-field appearance="outline">
                 <mat-label>Data de Vencimento</mat-label> <input formControlName="cardExpiry" matInput placeholder="Data de Vencimento"
-                  card-expiry />
+                  name="expiry" />
               </mat-form-field>
             </div>
             <div class="margin"></div>
             <div class="field">
               <mat-form-field appearance="outline">
                 <mat-label>Código de segurança</mat-label> <input formControlName="cardCVC" matInput placeholder="Código de segurança"
-                  card-cvc />
+                  name="cvc" />
               </mat-form-field>
             </div>
           </div>
         </div>
       </form>
-      <div class="card-container"></div>
+      <div #card class="card-container"></div>
       <div class="middle-col">
         <div class="row">
           <div class="buttons">
