@@ -2,23 +2,32 @@
   <app-loading #loading></app-loading>
   <mat-card class="info-principal">
     <mat-card-header>
-      <mat-card-actions style="width: 100%" [align]="'right'">
-        <button style="float: right" mat-button><mat-icon>menu</mat-icon></button>
+      <mat-card-actions style="width: 100%" [align]="'left'">
+        <!-- <button style="float: right" mat-button [matMenuTriggerFor]="menu">
+          <mat-icon>menu</mat-icon>
+        </button> -->
+        <button *ngIf="pagamentoSelecionado"  (click)="onVoltar($event)" style="float: left" mat-icon-button>
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <!-- <mat-menu xPosition="before" #menu="matMenu">
+          <button mat-menu-item>Item 1</button>
+          <button mat-menu-item>Item 2</button>
+        </mat-menu> -->
       </mat-card-actions>
     </mat-card-header>
     <perfect-scrollbar class="pagamento">
       <div class="row" *ngIf="!pagamentoSelecionado" style="display: flex; align-content: space-evenly; height: 100%; width: 100%;">
         <div style="display: flex; align-items: center; height: 100%;">
           <mat-card class="imagem" (click)="initCard()">
-            <!-- <mat-card-header> <strong>Teste</strong> </mat-card-header> -->
             <div class="img"><img src="./assets/cartao.svg" height="200px" /></div>
           </mat-card>
         </div>
         <div style="display: flex; align-items: center;">
-          <mat-card class="imagem"> <img src="./assets/boleto.svg" height="200px" (click)="pagamentoSelecionado = 'boleto'" /> </mat-card>
+          <mat-card class="imagem"> <img src="./assets/boleto.svg" height="200px" (click)="pagamentoSelecionado = 'boleto'" />
+          </mat-card>
         </div>
       </div>
-      <app-cartao-credito-form  *ngIf="pagamentoSelecionado && pagamentoSelecionado === 'cartao'" [cartaoCredito]="cartaoCredito"></app-cartao-credito-form>
+      <app-cartao-credito-form *ngIf="pagamentoSelecionado && pagamentoSelecionado === 'cartao'" [cartaoCredito]="cartaoCredito"></app-cartao-credito-form>
       <div class="middle-col" *ngIf="pagamentoSelecionado" style="width: 100%;">
         <div class="row">
           <div class="buttons">
@@ -32,7 +41,9 @@
   <mat-card class="info-produto">
     <perfect-scrollbar style="overflow-y: auto;">
       <div class="picture"><img src="./assets/full_logo.svg" /></div>
-      <app-produto-checkout *ngFor="let item of produtos;" [produto]="item"></app-produto-checkout>
+      <app-produto-checkout *ngFor="let item of produtos;" [produto]="item">
+      </app-produto-checkout>
+      <div class="after"></div>
     </perfect-scrollbar>
     <hr />
     <div class="total">

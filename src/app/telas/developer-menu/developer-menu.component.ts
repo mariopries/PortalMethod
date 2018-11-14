@@ -103,6 +103,10 @@ export class DeveloperMenuComponent implements OnInit, AfterViewInit {
     // });
   }
 
+  onVoltar($event) {
+    this.pagamentoSelecionado = null;
+  }
+
   public async onEnviar($event) {
     if (this.cartaoCredito && this.cartaoCredito.enabled && this.pagamentoSelecionado === 'cartao') {
       try {

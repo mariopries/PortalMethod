@@ -1,4 +1,4 @@
-import { MatFormFieldModule, MatSelectModule, MatInputModule, MatCardModule, MatDialogModule, MatProgressSpinnerModule, MatDividerModule, MatStepperModule } from "@angular/material/";
+import { MatFormFieldModule, MatSelectModule, MatInputModule, MatCardModule, MatDialogModule, MatProgressSpinnerModule, MatDividerModule, MatStepperModule, MatMenuModule } from "@angular/material/";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from "@angular/common/http";
@@ -82,7 +82,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatProgressSpinnerModule,
     MatDividerModule,
     MatStepperModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ZoopErrorInterceptor, multi: true },
