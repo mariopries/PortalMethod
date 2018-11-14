@@ -25,6 +25,7 @@ import { CurrencyPipe } from "@angular/common";
 import { MoneyPipe } from './pipes/money.pipe';
 import { NumeroPipe } from './pipes/numero.pipe';
 import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { BasePopupComponent } from './components/base-popup/base-popup.component';
 
 export let Client: HttpClient;
 
@@ -33,7 +34,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 @NgModule({
-  declarations: [AppComponent, TesteComponent, DeveloperMenuComponent, NavbarComponent, ToolbarComponent, TesteFormComponent, VendedoresComponent, HomeComponent, UppercaseDirective, MoneyPipe, NumeroPipe],
+  declarations: [AppComponent, TesteComponent, DeveloperMenuComponent, NavbarComponent, ToolbarComponent, TesteFormComponent, VendedoresComponent, HomeComponent, UppercaseDirective, MoneyPipe, NumeroPipe, BasePopupComponent],
   imports: [
     RouterModule.forRoot(
       appRoutes,

@@ -89,6 +89,7 @@ export class DeveloperMenuComponent implements OnInit {
 
   public onCancelar($event) {
     this.baseForm.reset();
+    this.baseForm.enable();
   }
 
   public getName() {
