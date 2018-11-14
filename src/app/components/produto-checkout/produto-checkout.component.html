@@ -1,0 +1,25 @@
+<mat-card class="one-item">
+  <div class="item-content">
+    <p class="row">
+      <span class="line">
+        <span class="col left"><strong>Descrição:</strong></span> <span class="col right">{{ produto.name | titlecase }}</span>
+      </span>
+    </p>
+    <p class="row">
+      <span class="line">
+        <span class="col left"><strong>Preço:</strong></span> <span class="col right">{{ produto.preco | money }}</span>
+      </span>
+    </p>
+    <p class="row">
+      <span class="line">
+        <span class="col left"><strong>Quantidade:</strong></span> <span class="col right">{{ produto.quantidade | number: "1.3-3" | numero }}</span>
+      </span>
+    </p>
+    <hr />
+    <p class="row" style="margin-block-end: 0; margin-bottom: 0;">
+      <span class="line">
+        <span class="col left"><strong>Total:</strong></span> <span class="col right">{{ produto.preco * produto.quantidade | money }}</span>
+      </span>
+    </p>
+  </div>
+</mat-card>

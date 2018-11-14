@@ -1,4 +1,4 @@
-export enum EWebHookStatus{
+export enum EWebHookStatus {
     new         = "new",
     registered  = "registered",
     active      = "active",

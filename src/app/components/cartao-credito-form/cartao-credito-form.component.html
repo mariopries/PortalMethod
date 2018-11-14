@@ -1,0 +1,24 @@
+<div class="col">
+  <form style="width: 100%;" [formGroup]="cartaoCredito">
+    <div class="example-container col">
+      <mat-form-field appearance="outline"> <mat-label>Número do Cartão</mat-label> <input formControlName="cardNumber" matInput placeholder="Número do Cartão" name="number" /> </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Primeiro Nome</mat-label> <input appUppercase formControlName="cardFirstName" matInput placeholder="Primeiro Nome" name="first-name" />
+      </mat-form-field>
+      <mat-form-field appearance="outline"> <mat-label>Sobrenome</mat-label> <input appUppercase formControlName="cardLastName" matInput placeholder="Sobrenome" name="last-name" /> </mat-form-field>
+      <div class="row">
+        <div class="field">
+          <mat-form-field appearance="outline">
+            <mat-label>Data de Vencimento</mat-label> <input formControlName="cardExpiry" matInput placeholder="Data de Vencimento" name="expiry" />
+          </mat-form-field>
+        </div>
+        <div class="margin"></div>
+        <div class="field">
+          <mat-form-field appearance="outline"> <mat-label>Código de segurança</mat-label> <input formControlName="cardCVC" matInput placeholder="Código de segurança" name="cvc" /> </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="space"></div>
+  <app-cartao-credito></app-cartao-credito>
+</div>

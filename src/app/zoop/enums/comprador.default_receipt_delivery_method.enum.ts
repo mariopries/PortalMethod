@@ -1,4 +1,4 @@
-export enum EDefaultReceiptDeliverMethod{
+export enum EDefaultReceiptDeliverMethod {
     sms     = "sms",
     email   = "email"
 }

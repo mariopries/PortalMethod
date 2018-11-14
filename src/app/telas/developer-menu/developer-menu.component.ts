@@ -1,25 +1,16 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  AfterViewInit
-} from "@angular/core";
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, NgModule } from "@angular/core";
+import { Form, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialog, MatDialogConfig } from "@angular/material";
+import { NgxCard } from "ngx-card/card";
+import { ICardJS } from "src/app/cardJS/interfaces/card.cardjs.model";
+import { BasePopupComponent } from "src/app/components/base-popup/base-popup.component";
+import { LoadingComponent } from "src/app/components/loading/loading.component";
 import { Token } from "src/app/zoop/class/token/token.class";
 import { ICard } from "src/app/zoop/class/transacao/models/card.model";
-import { FormGroup, FormBuilder, AbstractControl, Form } from "@angular/forms";
-import { Transacao } from "src/app/zoop/class/transacao/transacao.class";
 import { ICartaoNaoPresente } from "src/app/zoop/class/transacao/models/cartao_nao_presente.model";
-import { ETransacaoPaymentType } from "src/app/zoop/enums/transacao.payment-type.enum";
-import { ESourceType } from "src/app/zoop/enums/source.type.enum";
+import { Transacao } from "src/app/zoop/class/transacao/transacao.class";
 import { ETransacaoMode } from "src/app/zoop/enums/transacao.mode.enum";
-import { Client } from "src/app/app.module";
-import { BasePopupComponent } from "src/app/components/base-popup/base-popup.component";
-import { MatDialogConfig, MatDialog } from "@angular/material";
-import { LoadingComponent } from "src/app/components/loading/loading.component";
-import { NgxCard } from "ngx-card/card";
-import { NgxCardNameTemplate } from "ngx-card/inputs";
-import { ICardJS } from "src/app/cardJS/interfaces/card.cardjs.model";
+import { ETransacaoPaymentType } from "src/app/zoop/enums/transacao.payment-type.enum";
 // import * as Card from "../../cardJS/card";
 
 declare var card: any;
@@ -33,50 +24,62 @@ declare var Card: any;
 export class DeveloperMenuComponent implements OnInit, AfterViewInit {
   @ViewChild("loading") loading: LoadingComponent;
   @ViewChild("form") form: ElementRef<Form>;
+  public pagamentoSelecionado: string = null;
   public card: NgxCard;
-  public baseForm: FormGroup;
+  public cartaoCredito: FormGroup;
   public precosIndividuais = new Array();
   public precoTotal = 0;
   public quantidades = new Array();
   public names = new Array();
+  public firstRegister: FormGroup;
+  public botaoEnabled = true;
+  public produtos = new Array<{
+    name: string,
+    preco: number,
+    quantidade: number
+  }>();
+  public boleto: FormGroup;
   constructor(fb: FormBuilder, private alert: MatDialog) {
-    this.baseForm = fb.group({
+    this.firstRegister = fb.group({
+      tipoPessoa: null,
+      firstName: ["", Validators.required],
+      lastName: "",
+      codigo: "",
+    });
+    this.cartaoCredito = fb.group({
       cardNumber: null,
       cardFirstName: "",
       cardLastName: "",
       cardExpiry: null,
       cardCVC: null
     });
-    console.log(card);
-    console.log(Card);
+    this.boleto = fb.group({
+      cardNumber: null,
+      cardFirstName: "",
+      cardLastName: "",
+      cardExpiry: null,
+      cardCVC: null
+    });
   }
 
   ngOnInit() {
-    console.log(this.card);
     for (let index = 0; index < 30; index++) {
-      this.names.push(this.getName());
-      this.precosIndividuais.push(Math.random() * 10);
-      this.quantidades.push(Math.floor(Math.random() * 100));
+      this.produtos.push({
+        name: this.getName(),
+        preco: Math.random() * 10,
+        quantidade: Math.floor(Math.random() * 100)
+      });
     }
     let resultado = 0;
-    this.precosIndividuais.forEach((valor, index) => {
-      resultado += valor * 100 * this.quantidades[index];
+    this.produtos.forEach(produto => {
+      resultado += produto.preco * 100 * produto.quantidade;
     });
     this.precoTotal = resultado;
-    this.init();
+    this.loading.doneLoading();
   }
 
   ngAfterViewInit(): void {
-
-    const cardTeste = new Card(<ICardJS>{
-      form: "form",
-      container: ".card-container",
-      debug: true,
-      formSelectors: {
-        nameInput: 'input[name="first-name"], input[name="last-name"]'
-      }
-    });
-    console.log(cardTeste);
+    // this.initCard();
     // console.log(Card);
     // const card = new Card(<ICardJS>{
     //   form: "form",
@@ -88,39 +91,38 @@ export class DeveloperMenuComponent implements OnInit, AfterViewInit {
     // });
   }
 
-  public async init() {
-    const cartao = <ICard>{
-      card_number: "5356066320271893",
-      expiration_month: "07",
-      expiration_year: "2020",
-      holder_name: "José Inacio",
-      security_code: "123"
-    };
-    const result = await Token.CriarTokenCartao(cartao).toPromise();
-
-    console.log(result);
-    this.loading.doneLoading();
+  public initCard() {
+    this.pagamentoSelecionado = 'cartao';
+    // const cardTeste = new Card(<ICardJS>{
+    //   form: "#cartaoCredito",
+    //   container: ".card-container",
+    //   debug: true,
+    //   formSelectors: {
+    //     nameInput: 'input[name="first-name"], input[name="last-name"]'
+    //   }
+    // });
   }
 
   public async onEnviar($event) {
-    if (this.baseForm.enabled) {
+    if (this.cartaoCredito && this.cartaoCredito.enabled && this.pagamentoSelecionado === 'cartao') {
       try {
         this.loading.startLoading();
-        this.baseForm.disable();
+        this.cartaoCredito.disable();
+        this.botaoEnabled = false;
         const cartao = <ICard>{
-          card_number: this.baseForm.controls["cardNumber"].value,
-          expiration_month: this.baseForm.controls["cardExpiry"].value.substr(
+          card_number: this.cartaoCredito.controls["cardNumber"].value,
+          expiration_month: this.cartaoCredito.controls["cardExpiry"].value.substr(
             0,
             2
           ),
-          expiration_year: this.baseForm.controls["cardExpiry"].value.substr(
-            this.baseForm.controls["cardExpiry"].value.length - 2,
-            this.baseForm.controls["cardExpiry"].value.length
+          expiration_year: this.cartaoCredito.controls["cardExpiry"].value.substr(
+            this.cartaoCredito.controls["cardExpiry"].value.length - 2,
+            this.cartaoCredito.controls["cardExpiry"].value.length
           ),
-          holder_name: `${this.baseForm.controls["cardFirstName"].value} ${
-            this.baseForm.controls["cardLastName"].value
+          holder_name: `${this.cartaoCredito.controls["cardFirstName"].value} ${
+            this.cartaoCredito.controls["cardLastName"].value
           }`,
-          security_code: this.baseForm.controls["cardCVC"].value
+          security_code: this.cartaoCredito.controls["cardCVC"].value
         };
         const tokenCartao = await Token.CriarTokenCartao(cartao).toPromise();
         const transacao = <ICartaoNaoPresente>{
@@ -135,35 +137,43 @@ export class DeveloperMenuComponent implements OnInit, AfterViewInit {
             number_installments: 6
           }
         };
-        console.log(transacao.amount);
         const result = await Transacao.CriarCartaoNaoPresente(
           transacao
         ).toPromise();
-        console.log(result);
         this.loading.doneLoading();
         this.OpenAlert(
           `Transação número ${result.transaction_number}`,
           `Aprovada com sucesso!`
         );
         this.alert.afterAllClosed.subscribe(() => {
-          this.baseForm.reset();
-          this.baseForm.updateValueAndValidity();
-          this.baseForm.enable();
+          this.cartaoCredito.reset();
+          this.cartaoCredito.updateValueAndValidity();
+          this.cartaoCredito.enable();
         });
       } catch (error) {
-        console.log(error);
+        this.OpenAlert('Erro interno', "Erro desconhecido");
         this.loading.doneLoading();
-        this.baseForm.reset();
-        this.baseForm.updateValueAndValidity();
-        this.baseForm.enable();
+        this.cartaoCredito.reset();
+        this.cartaoCredito.updateValueAndValidity();
+        this.cartaoCredito.enable();
+        this.botaoEnabled = true;
       }
+    } else if ( this.boleto && this.boleto.enabled && this.pagamentoSelecionado === 'boleto' ) {
+      this.OpenAlert('Erro', "Não implementado");
+    } else {
+      this.OpenAlert('Erro', "Não implementado");
     }
-    console.log(this.card);
   }
 
   public onCancelar($event) {
-    this.baseForm.reset();
-    this.baseForm.enable();
+    if (this.cartaoCredito && !this.cartaoCredito.enabled && this.pagamentoSelecionado === 'cartao') {
+      this.cartaoCredito.reset();
+      this.cartaoCredito.enable();
+    } else if ( this.boleto && this.boleto.enabled && this.pagamentoSelecionado === 'boleto' ) {
+      this.OpenAlert('Erro', "Não implementado");
+    } else {
+      this.OpenAlert('Erro', "Não implementado");
+    }
   }
 
   public getName() {

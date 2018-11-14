@@ -1,4 +1,4 @@
-export interface IOwnerAddress{
+export interface IOwnerAddress {
 
     line1:          string;
     line2:          string;

@@ -5,5 +5,5 @@ export interface ICard {
   expiration_year:  string;
   card_number:      string;
   security_code:    string;
-  
+
 }

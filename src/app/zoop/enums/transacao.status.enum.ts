@@ -1,4 +1,4 @@
-export enum ETransacaoStatus{
+export enum ETransacaoStatus {
 
     new             = "new",
     pending         = "pending",

@@ -8,10 +8,6 @@
   width: 500px;
 }
 
-mat-card {
-  height: 100%;
-}
-
 .total {
   padding-top: 10px;
 }
@@ -55,7 +51,7 @@ mat-card {
 }
 
 .one-item {
-  margin-top: 20px;
+  margin: 20px;
 }
 
 .info-produto {
@@ -68,6 +64,11 @@ mat-card {
   justify-content: space-around;
   flex-direction: column;
   height: calc(100% - 84px);
+}
+
+.imagem {
+  min-height: 200px;
+  cursor: pointer;
 }
 
 .card-container {
@@ -108,7 +109,6 @@ mat-card {
   justify-content: space-around;
   flex: 1;
 }
-
 .col {
   flex: 1;
 }

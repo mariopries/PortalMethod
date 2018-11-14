@@ -1,0 +1,29 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 calc(50% - 250px);
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  align-items: stretch;
+}
+
+.col {
+  flex: 1;
+  align-content: space-evenly;
+}
+
+.field {
+  width: calc(50% - 10px);
+}
+form {
+  display: flex;
+}
+
+.space {
+  padding: 10px 0;
+}

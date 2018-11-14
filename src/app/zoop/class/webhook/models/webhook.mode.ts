@@ -1,6 +1,6 @@
 import { EWebHookStatus } from "src/app/zoop/enums/webhook.status.enum";
 
-export interface IWebHook{
+export interface IWebHook {
     id:             string;         // Identificador exclusivo para este webhook
     resource:       string;         // Value: webhook
     url:            string;         // A URL para a qual os dados do evento serão postados. A carga útil dos dados Webhook é enviada como JSON no corpo de solicitação POST.

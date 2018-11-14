@@ -1,0 +1,23 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  align-items: stretch;
+}
+.col {
+  flex: 1;
+}
+.line {
+  width: 100%;
+  display: flex;
+}
+.one-item {
+  margin: 20px;
+}
+.right {
+  text-align: right;
+}
+.left {
+  text-align: left;
+}

@@ -1,4 +1,4 @@
-import { MatFormFieldModule, MatSelectModule, MatInputModule, MatCardModule, MatDialogModule, MatProgressSpinnerModule } from "@angular/material/";
+import { MatFormFieldModule, MatSelectModule, MatInputModule, MatCardModule, MatDialogModule, MatProgressSpinnerModule, MatDividerModule, MatStepperModule } from "@angular/material/";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from "@angular/common/http";
@@ -15,18 +15,21 @@ import { appRoutes } from "./app.routing";
 import { RouterModule } from "@angular/router";
 import { ZoopHeaderInterceptor } from "./zoop/services/zoop-header-interceptor.service";
 import { ZoopErrorInterceptor } from "./zoop/services/zoop-error-interceptor.service";
-import { CardModule } from 'ngx-card/ngx-card';
-import { TesteFormComponent } from './teste-form/teste-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { VendedoresComponent } from './telas/vendedores/vendedores.component';
-import { HomeComponent } from './telas/home/home.component';
-import { UppercaseDirective } from './directives/uppercase.directive';
+import { CardModule } from "ngx-card/ngx-card";
+import { TesteFormComponent } from "./teste-form/teste-form.component";
+import { ReactiveFormsModule } from "@angular/forms";
+import { VendedoresComponent } from "./telas/vendedores/vendedores.component";
+import { HomeComponent } from "./telas/home/home.component";
+import { UppercaseDirective } from "./directives/uppercase.directive";
 import { CurrencyPipe } from "@angular/common";
-import { MoneyPipe } from './pipes/money.pipe';
-import { NumeroPipe } from './pipes/numero.pipe';
-import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { BasePopupComponent } from './components/base-popup/base-popup.component';
-import { LoadingComponent } from './components/loading/loading.component';
+import { MoneyPipe } from "./pipes/money.pipe";
+import { NumeroPipe } from "./pipes/numero.pipe";
+import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
+import { BasePopupComponent } from "./components/base-popup/base-popup.component";
+import { LoadingComponent } from "./components/loading/loading.component";
+import { CartaoCreditoFormComponent } from './components/cartao-credito-form/cartao-credito-form.component';
+import { CartaoCreditoComponent } from './components/cartao-credito/cartao-credito.component';
+import { ProdutoCheckoutComponent } from "./components/produto-checkout/produto-checkout.component";
 
 export let Client: HttpClient;
 
@@ -35,7 +38,24 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 @NgModule({
-  declarations: [AppComponent, TesteComponent, DeveloperMenuComponent, NavbarComponent, ToolbarComponent, TesteFormComponent, VendedoresComponent, HomeComponent, UppercaseDirective, MoneyPipe, NumeroPipe, BasePopupComponent, LoadingComponent],
+  declarations: [
+    AppComponent,
+    TesteComponent,
+    DeveloperMenuComponent,
+    NavbarComponent,
+    ToolbarComponent,
+    TesteFormComponent,
+    VendedoresComponent,
+    HomeComponent,
+    UppercaseDirective,
+    MoneyPipe,
+    NumeroPipe,
+    BasePopupComponent,
+    LoadingComponent,
+    CartaoCreditoFormComponent,
+    CartaoCreditoComponent,
+    ProdutoCheckoutComponent
+  ],
   imports: [
     RouterModule.forRoot(
       appRoutes,
@@ -59,13 +79,16 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReactiveFormsModule,
     PerfectScrollbarModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDividerModule,
+    MatStepperModule,
+    MatIconModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ZoopErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ZoopHeaderInterceptor, multi: true },
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
-    CurrencyPipe,
+    CurrencyPipe
   ],
   bootstrap: [AppComponent],
   entryComponents: [BasePopupComponent]
