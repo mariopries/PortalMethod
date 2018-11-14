@@ -1,37 +1,51 @@
 <div class="row" style="height: 100%">
   <mat-card class="info-principal">
-    <form [formGroup]="baseForm">
-      <div class="example-container col" card container=".card-container" card-width="350" formatting="false" debug="true" [placeholders]="{ name: 'Nome Completo' }">
-        <mat-form-field appearance="outline"> <mat-label>Número do Cartão</mat-label> <input formControlName="cardNumber" matInput placeholder="Número do Cartão" card-number /> </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Primeiro Nome</mat-label> <input appUppercase formControlName="cardFirstName" matInput placeholder="Primeiro Nome" card-name />
-        </mat-form-field>
-        <mat-form-field appearance="outline"> <mat-label>Sobrenome</mat-label> <input appUppercase formControlName="cardLastName" matInput placeholder="Sobrenome" card-name /> </mat-form-field>
+    <perfect-scrollbar>
+      <form [formGroup]="baseForm">
+        <div class="example-container col" card container=".card-container" card-width="350" formatting="false" debug="true"
+          [placeholders]="{ name: 'Nome Completo' }">
+          <mat-form-field appearance="outline">
+            <mat-label>Número do Cartão</mat-label> <input formControlName="cardNumber" matInput placeholder="Número do Cartão"
+              card-number />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Primeiro Nome</mat-label> <input appUppercase formControlName="cardFirstName" matInput
+              placeholder="Primeiro Nome" card-name />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Sobrenome</mat-label> <input appUppercase formControlName="cardLastName" matInput placeholder="Sobrenome"
+              card-name />
+          </mat-form-field>
+          <div class="row">
+            <div class="field">
+              <mat-form-field appearance="outline">
+                <mat-label>Data de Vencimento</mat-label> <input formControlName="cardExpiry" matInput placeholder="Data de Vencimento"
+                  card-expiry />
+              </mat-form-field>
+            </div>
+            <div class="margin"></div>
+            <div class="field">
+              <mat-form-field appearance="outline">
+                <mat-label>Código de segurança</mat-label> <input formControlName="cardCVC" matInput placeholder="Código de segurança"
+                  card-cvc />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="card-container"></div>
+      <div class="middle-col">
         <div class="row">
-          <div class="field">
-            <mat-form-field appearance="outline">
-              <mat-label>Data de Vencimento</mat-label> <input formControlName="cardExpiry" matInput placeholder="Data de Vencimento" card-expiry />
-            </mat-form-field>
-          </div>
-          <div class="margin"></div>
-          <div class="field">
-            <mat-form-field appearance="outline"> <mat-label>Código de segurança</mat-label> <input formControlName="cardCVC" matInput placeholder="Código de segurança" card-cvc /> </mat-form-field>
+          <div class="buttons">
+            <button [disabled]="!this.baseForm.enabled" (click)="onEnviar($event)" mat-raised-button color="primary">Enviar</button>
+            <button (click)="onCancelar($event)" mat-raised-button color="warn">Cancelar</button>
           </div>
         </div>
       </div>
-    </form>
-    <div class="card-container"></div>
-    <div class="middle-col">
-      <div class="row">
-        <div class="buttons">
-          <button [disabled]="!this.baseForm.enabled" (click)="onEnviar($event)" mat-raised-button color="primary">Enviar</button>
-          <button (click)="onCancelar($event)" mat-raised-button color="warn">Cancelar</button>
-        </div>
-      </div>
-    </div>
+    </perfect-scrollbar>
   </mat-card>
   <mat-card class="info-produto">
-    <div  style="overflow-y: auto;">
+    <perfect-scrollbar style="overflow-y: auto;">
       <div class="title">
         <p><strong>Lorem ipsum dolor sit amet.</strong></p>
       </div>
@@ -40,21 +54,31 @@
         <div class="item-content">
           <p class="row">
             <span class="line">
-              <span class="col left"><strong>Descrição:</strong></span> <span class="col right">{{ names[i] | titlecase }}</span>
+              <span class="col left"><strong>Descrição:</strong></span> <span class="col right">{{ names[i] | titlecase
+                }}</span>
             </span>
           </p>
           <p class="row">
             <span class="line">
-              <span class="col left"><strong>Preço:</strong></span> <span class="col right">{{ precosIndividuais[i] | money }}</span>
+              <span class="col left"><strong>Preço:</strong></span> <span class="col right">{{ precosIndividuais[i] |
+                money }}</span>
             </span>
           </p>
           <p class="row">
             <span class="line">
-              <span class="col left"><strong>Quantidade:</strong></span> <span class="col right">{{ quantidades[i] | number: "1.3-3" | numero }}</span>
+              <span class="col left"><strong>Quantidade:</strong></span> <span class="col right">{{ quantidades[i] |
+                number: "1.3-3" | numero }}</span>
             </span>
           </p>
         </div>
       </mat-card>
+    </perfect-scrollbar>
+    <div class="total">
+      <p class="row">
+        <span class="line">
+          <span class="col left"><strong>Total:</strong></span> <span class="col right">{{ precoTotal | money }}</span>
+        </span>
+      </p>
     </div>
   </mat-card>
 </div>

@@ -12,6 +12,10 @@ mat-card {
   height: 100%;
 }
 
+.total {
+  padding-top: 10px;
+}
+
 .info-principal {
   display: flex;
   flex-direction: column;
@@ -57,7 +61,7 @@ mat-card {
 .info-produto {
   display: flex;
   margin: 20px;
-  padding: 20px;
+  padding: 10px;
   flex-basis: 25%;
   min-width: 300px;
   position: relative;

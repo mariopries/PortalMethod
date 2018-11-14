@@ -24,8 +24,13 @@ import { UppercaseDirective } from './directives/uppercase.directive';
 import { CurrencyPipe } from "@angular/common";
 import { MoneyPipe } from './pipes/money.pipe';
 import { NumeroPipe } from './pipes/numero.pipe';
+import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 export let Client: HttpClient;
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 @NgModule({
   declarations: [AppComponent, TesteComponent, DeveloperMenuComponent, NavbarComponent, ToolbarComponent, TesteFormComponent, VendedoresComponent, HomeComponent, UppercaseDirective, MoneyPipe, NumeroPipe],
@@ -49,11 +54,13 @@ export let Client: HttpClient;
     MatListModule,
     CardModule,
     MatRadioModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PerfectScrollbarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ZoopErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ZoopHeaderInterceptor, multi: true },
+    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
     CurrencyPipe,
   ],
   bootstrap: [AppComponent]
