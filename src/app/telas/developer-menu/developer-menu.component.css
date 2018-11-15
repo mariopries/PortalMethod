@@ -16,13 +16,12 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  min-width: 520px;
+  min-width: fit-content;
+  max-width: 60%;
   height: calc(100% - 84px);
-  margin: 20px;
+  min-height: 75%;
   padding: 20px;
-  /* justify-content: space-around; */
-  /* width: calc((100% - 120px)/3); */
-  /* padding-bottom: 0px; */
+  flex-shrink: 2;
   align-items: stretch;
   overflow: auto;
 }
@@ -56,7 +55,6 @@
 
 .info-produto {
   display: flex;
-  margin: 20px;
   padding: 20px;
   flex-basis: 25%;
   min-width: 300px;
@@ -91,9 +89,9 @@
 .row {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-wrap: nowrap;
-  align-items: stretch;
+  align-items: center;
 }
 
 .buttons {

@@ -9,6 +9,7 @@
         <button *ngIf="pagamentoSelecionado"  (click)="onVoltar($event)" style="float: left" mat-icon-button>
           <mat-icon>arrow_back</mat-icon>
         </button>
+        <strong><h1>Título</h1></strong>
         <!-- <mat-menu xPosition="before" #menu="matMenu">
           <button mat-menu-item>Item 1</button>
           <button mat-menu-item>Item 2</button>
@@ -39,7 +40,7 @@
     </perfect-scrollbar>
   </mat-card>
   <mat-card class="info-produto">
-    <perfect-scrollbar style="overflow-y: auto;">
+    <perfect-scrollbar>
       <div class="picture"><img src="./assets/full_logo.svg" /></div>
       <app-produto-checkout *ngFor="let item of produtos;" [produto]="item">
       </app-produto-checkout>
