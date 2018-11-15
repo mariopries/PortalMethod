@@ -22,17 +22,17 @@ perfect-scrollbar.pagamento {
   align-items: center;
   display: flex;
   flex-flow: row wrap;
-  height: calc(100% - 88px)
+  height: 100%;
 }
 
 perfect-scrollbar.pagamento .ps {
-  align-items: center !important;
-  display: flex !important;
-  flex-flow: row wrap !important;
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
 }
 
 perfect-scrollbar.pagamento .ps-content {
-  align-content: space-evenly;
+  align-content: space-between;
   display: flex;
   flex-flow: row wrap;
   width: 100%;
@@ -42,12 +42,9 @@ perfect-scrollbar.pagamento .ps-content {
 app-cartao-credito-form {
   display: flex;
   width: 100%;
+  min-height: fit-content;
 }
 
 app-cartao-credito {
   width: 100%;
-}
-
-.ps.ps--active-y {
-  box-shadow: inset 0 0 20px 5px rgba(0,0,0,0.3);
 }

@@ -27,3 +27,8 @@ form {
 .space {
   padding: 10px 0;
 }
+
+app-cartao-credito {
+  height: 200px;
+  display: flex;
+}
