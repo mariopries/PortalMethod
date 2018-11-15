@@ -62,8 +62,6 @@ export class TesteComponent implements OnInit {
   }
 
   public async credito() {
-
-    const token = new Token();
     const card = <ICard>{
       card_number: "4761340000000035",
       expiration_month: "07",
@@ -79,8 +77,6 @@ export class TesteComponent implements OnInit {
   }
 
   public async transaction() {
-
-    const transacao = new Transacao();
 
     const cartaoNaoPresente = <ICartaoNaoPresente>{
       amount: 200,

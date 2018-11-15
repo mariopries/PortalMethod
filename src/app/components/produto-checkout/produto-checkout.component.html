@@ -1,25 +1,50 @@
-<mat-card class="one-item">
-  <div class="item-content">
-    <p class="row">
-      <span class="line">
-        <span class="col left"><strong>Descrição:</strong></span> <span class="col right">{{ produto.name | titlecase }}</span>
-      </span>
-    </p>
-    <p class="row">
-      <span class="line">
-        <span class="col left"><strong>Preço:</strong></span> <span class="col right">{{ produto.preco | money }}</span>
-      </span>
-    </p>
-    <p class="row">
-      <span class="line">
-        <span class="col left"><strong>Quantidade:</strong></span> <span class="col right">{{ produto.quantidade | number: "1.3-3" | numero }}</span>
-      </span>
-    </p>
-    <hr />
-    <p class="row" style="margin-block-end: 0; margin-bottom: 0;">
-      <span class="line">
-        <span class="col left"><strong>Total:</strong></span> <span class="col right">{{ produto.preco * produto.quantidade | money }}</span>
-      </span>
-    </p>
+<div class="linha flex spread">
+  <div class="coluna flex">
+    <strong>
+      <p class="grande">{{ produto.name | titlecase }}</p>
+    </strong>
+    <div class="linha flex">
+      <strong> <p class="pequeno">Preço:</p> </strong>&nbsp;
+      <p class="pequeno">{{ produto.preco | money }}</p>
+    </div>
+    <div class="linha flex">
+      <strong> <p class="pequeno">Quantidade:</p> </strong>&nbsp;
+      <p class="pequeno">{{ produto.quantidade | number: "1.3-3" | numero }}</p>
+    </div>
   </div>
-</mat-card>
+  <div class="coluna flex bottom-vertical">
+    <div>
+      <strong>
+        <p class="grande">{{ produto.preco * produto.quantidade | money }}</p>
+      </strong>
+    </div>
+  </div>
+</div>
+<hr />
+<!--
+  <mat-card class="one-item">
+    <div class="item-content">
+      <p class="row">
+        <span class="line">
+          <span class="col left"><strong>Descrição:</strong></span> <span class="col right">{{ produto.name | titlecase }}</span>
+        </span>
+      </p>
+      <p class="row">
+        <span class="line">
+          <span class="col left"><strong>Preço:</strong></span> <span class="col right">{{ produto.preco | money }}</span>
+        </span>
+      </p>
+      <p class="row">
+        <span class="line">
+          <span class="col left"><strong>Quantidade:</strong></span> <span class="col right">{{ produto.quantidade | number: "1.3-3" | numero }}</span>
+        </span>
+      </p>
+      <hr />
+      <p class="row" style="margin-block-end: 0; margin-bottom: 0;">
+        <span class="line">
+          <span class="col left"><strong>Total:</strong></span> <span class="col right">{{ produto.preco * produto.quantidade | money }}</span>
+        </span>
+      </p>
+    </div>
+  </mat-card>
+-->

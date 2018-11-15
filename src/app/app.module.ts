@@ -30,6 +30,7 @@ import { LoadingComponent } from "./components/loading/loading.component";
 import { CartaoCreditoFormComponent } from './components/cartao-credito-form/cartao-credito-form.component';
 import { CartaoCreditoComponent } from './components/cartao-credito/cartao-credito.component';
 import { ProdutoCheckoutComponent } from "./components/produto-checkout/produto-checkout.component";
+import { BoletoFormComponent } from './components/boleto-form/boleto-form.component';
 
 export let Client: HttpClient;
 
@@ -54,7 +55,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LoadingComponent,
     CartaoCreditoFormComponent,
     CartaoCreditoComponent,
-    ProdutoCheckoutComponent
+    ProdutoCheckoutComponent,
+    BoletoFormComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -83,7 +85,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatDividerModule,
     MatStepperModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ZoopErrorInterceptor, multi: true },

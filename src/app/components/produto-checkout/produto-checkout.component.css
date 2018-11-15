@@ -21,3 +21,49 @@
 .left {
   text-align: left;
 }
+.item-content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.total {
+  display: flex;
+  align-content: center;
+}
+
+.center {
+  justify-content: space-around;
+  align-content: center;
+}
+
+.flex {
+  display: flex;
+}
+.grande {
+  margin: .5em 0;
+  font-size: 14px;
+}
+
+.pequeno {
+  font-size: 12px;
+  margin: 0;
+}
+
+.linha {
+  width: 100%;
+}
+.coluna {
+  flex-direction: column;
+}
+
+.valor-total {
+  flex-basis: 25%;
+}
+
+.spread {
+  justify-content: space-between;
+}
+
+.bottom-vertical {
+  justify-content: flex-end;
+}

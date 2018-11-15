@@ -3,54 +3,91 @@
   <mat-card class="info-principal">
     <mat-card-header>
       <mat-card-actions style="width: 100%" [align]="'left'">
-        <!-- <button style="float: right" mat-button [matMenuTriggerFor]="menu">
-          <mat-icon>menu</mat-icon>
-        </button> -->
-        <button *ngIf="pagamentoSelecionado"  (click)="onVoltar($event)" style="float: left" mat-icon-button>
-          <mat-icon>arrow_back</mat-icon>
-        </button>
-        <strong><h1>Título</h1></strong>
-        <!-- <mat-menu xPosition="before" #menu="matMenu">
-          <button mat-menu-item>Item 1</button>
-          <button mat-menu-item>Item 2</button>
-        </mat-menu> -->
+        <div class="linha">
+          <div class="coluna-botao">
+            <button
+              [ngStyle]="{'visibility': !pagamentoSelecionado ? 'hidden' : 'visible'}"
+              (click)="onVoltar($event)"
+              style="float: left"
+              mat-icon-button
+            >
+              <mat-icon>arrow_back</mat-icon>
+            </button>
+          </div>
+          <div class="coluna-titulo">
+            <strong>
+              <h1>{{ titulo }}</h1>
+            </strong>
+          </div>
+        </div>
       </mat-card-actions>
     </mat-card-header>
     <perfect-scrollbar class="pagamento">
-      <div class="row" *ngIf="!pagamentoSelecionado" style="display: flex; align-content: space-evenly; height: 100%; width: 100%;">
+      <div
+        class="row"
+        *ngIf="!pagamentoSelecionado"
+        style="display: flex; align-content: space-evenly; height: 100%; width: 100%;"
+      >
         <div style="display: flex; align-items: center; height: 100%;">
           <mat-card class="imagem" (click)="initCard()">
-            <div class="img"><img src="./assets/cartao.svg" height="200px" /></div>
+            <div class="img">
+              <img src="./assets/cartao.svg" height="200px" />
+            </div>
           </mat-card>
         </div>
         <div style="display: flex; align-items: center;">
-          <mat-card class="imagem"> <img src="./assets/boleto.svg" height="200px" (click)="pagamentoSelecionado = 'boleto'" />
+          <mat-card class="imagem" (click)="initBoleto()">
+            <img
+              src="./assets/boleto.svg"
+              height="200px"
+            />
           </mat-card>
         </div>
       </div>
-      <app-cartao-credito-form *ngIf="pagamentoSelecionado && pagamentoSelecionado === 'cartao'" [cartaoCredito]="cartaoCredito"></app-cartao-credito-form>
+      <app-cartao-credito-form
+        *ngIf="pagamentoSelecionado && pagamentoSelecionado === 'cartao'"
+        [cartaoCredito]="cartaoCredito"
+      ></app-cartao-credito-form>
       <div class="middle-col" *ngIf="pagamentoSelecionado" style="width: 100%;">
         <div class="row">
           <div class="buttons">
-            <button [disabled]="!botaoEnabled" (click)="onEnviar($event)" mat-raised-button color="primary">Enviar</button>
-            <button (click)="onCancelar($event)" mat-raised-button color="warn">Cancelar</button>
+            <button
+              [disabled]="!botaoEnabled"
+              (click)="onEnviar($event)"
+              mat-raised-button
+              color="primary"
+            >
+              Enviar
+            </button>
+            <button (click)="onCancelar($event)" mat-raised-button color="warn">
+              Cancelar
+            </button>
           </div>
         </div>
       </div>
     </perfect-scrollbar>
   </mat-card>
   <mat-card class="info-produto">
+    <div class="picture"><img src="./assets/full_logo.svg" /></div>
+    <div class="row top-row" style="justify-content: space-between">
+      <div class="left"><p style="margin: 0">Descrição</p></div>
+      <div class="right"><p style="margin: 0">Valor</p></div>
+    </div>
     <perfect-scrollbar>
-      <div class="picture"><img src="./assets/full_logo.svg" /></div>
-      <app-produto-checkout *ngFor="let item of produtos;" [produto]="item">
-      </app-produto-checkout>
+      <div class="margin-5px">
+        <app-produto-checkout *ngFor="let item of produtos" [produto]="item">
+        </app-produto-checkout>
+      </div>
       <div class="after"></div>
     </perfect-scrollbar>
     <hr />
     <div class="total">
       <p class="row">
         <span class="line">
-          <span class="col left"><strong>Total:</strong></span> <span class="col right">{{ precoTotal | money }}</span>
+          <span class="col left"><strong>Total:</strong></span>
+          <span class="col right"
+            ><strong>{{ precoTotal | money }}</strong></span
+          >
         </span>
       </p>
     </div>

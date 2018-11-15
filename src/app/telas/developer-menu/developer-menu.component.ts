@@ -33,6 +33,7 @@ export class DeveloperMenuComponent implements OnInit, AfterViewInit {
   public names = new Array();
   public firstRegister: FormGroup;
   public botaoEnabled = true;
+  public titulo = "Selecione a forma de Pagamento";
   public produtos = new Array<{
     name: string,
     preco: number,
@@ -63,6 +64,11 @@ export class DeveloperMenuComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.produtos.push({
+      name: "Palito de bambu 4x10cm sabor menta",
+      preco: Math.random() * 10,
+      quantidade: Math.floor(Math.random() * 100)
+    });
     for (let index = 0; index < 30; index++) {
       this.produtos.push({
         name: this.getName(),
@@ -91,8 +97,14 @@ export class DeveloperMenuComponent implements OnInit, AfterViewInit {
     // });
   }
 
+  public initBoleto() {
+    this.pagamentoSelecionado = "boleto";
+    this.titulo = "Preencha as informações do boleto";
+  }
+
   public initCard() {
     this.pagamentoSelecionado = 'cartao';
+    this.titulo = "Preencha as informações do cartão";
     // const cardTeste = new Card(<ICardJS>{
     //   form: "#cartaoCredito",
     //   container: ".card-container",
@@ -105,6 +117,7 @@ export class DeveloperMenuComponent implements OnInit, AfterViewInit {
 
   onVoltar($event) {
     this.pagamentoSelecionado = null;
+    this.titulo = "Selecione a forma de Pagamento";
   }
 
   public async onEnviar($event) {
