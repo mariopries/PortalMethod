@@ -1,5 +1,5 @@
-import { Component, OnInit, AfterViewInit, Output, Input } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { AfterViewInit, Component, Input, OnInit } from "@angular/core";
+import { FormGroup } from "@angular/forms";
 import { ICardJS } from "src/app/cardJS/interfaces/card.cardjs.model";
 
 declare var Card: any;
@@ -12,13 +12,13 @@ declare var Card: any;
 
 export class CartaoCreditoFormComponent implements OnInit, AfterViewInit {
   @Input() cartaoCredito: FormGroup;
-  constructor(fb: FormBuilder) {
+  constructor() {
   }
 
   ngOnInit() {}
 
   ngAfterViewInit() {
-    const cardTeste = new Card(<ICardJS>{
+    const oneCartao = new Card(<ICardJS>{
       form: "form",
       container: "app-cartao-credito",
       debug: true,

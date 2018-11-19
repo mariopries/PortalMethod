@@ -176,3 +176,13 @@
   padding-right: 72px;
   text-align: center;
 }
+
+.selection {
+  flex-wrap: wrap;
+  min-height: fit-content;
+}
+
+.flex-spacer {
+  display: flex;
+  /* flex: 1 0 10px; */
+}

@@ -11,3 +11,8 @@ mat-toolbar {
 .space {
   padding: 0 5px;
 }
+
+.flex-space {
+  display: flex;
+  flex: 1 1;
+}

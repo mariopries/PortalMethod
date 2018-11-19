@@ -1,6 +1,6 @@
-import { Directive, ElementRef, HostListener, AfterViewInit, Input, forwardRef } from '@angular/core';
-import { CurrencyMaskService } from './currency-mask.service';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { Directive, ElementRef, HostListener, AfterViewInit, Input, forwardRef } from "@angular/core";
+import { CurrencyMaskService } from "./currency-mask.service";
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from "@angular/forms";
 
 const noop = () => {};
 
@@ -11,7 +11,7 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 };
 
 @Directive({
-  selector: '[appCurrencyMask]',
+  selector: "[appCurrencyMask]",
   providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
 })
 export class CurrencyMaskDirective implements AfterViewInit, ControlValueAccessor {
@@ -19,7 +19,7 @@ export class CurrencyMaskDirective implements AfterViewInit, ControlValueAccesso
   // Keeps track of the value without formatting
   private innerValue: any;
   // Optional Parameter to allow for negative number interaction
-  @Input('allowNegative') allowNegative: boolean;
+  @Input() allowNegative: boolean;
   constructor(private elementRef: ElementRef, private currencyMaskService: CurrencyMaskService) {
     this.el = elementRef.nativeElement;
   }
@@ -61,18 +61,18 @@ export class CurrencyMaskDirective implements AfterViewInit, ControlValueAccesso
   }
 
   ngAfterViewInit() {
-    this.el.style.textAlign = 'left';
+    this.el.style.textAlign = "left";
   }
 
   // On Focus remove all non-digit or decimal separator values
-  @HostListener('focus', ['$event.target.value'])
+  @HostListener("focus", ["$event.target.value"])
   onfocus(value) {
     this.el.value = this.currencyMaskService.parse(value, this.allowNegative);
     this.el.select();
   }
 
   // On Blur remove all symbols except last . and set to currency format
-  @HostListener('blur', ['$event.target.value'])
+  @HostListener("blur", ["$event.target.value"])
   onBlur(value) {
     this.onTouchedCallback();
     this.el.value = this.currencyMaskService.transform(value, this.allowNegative);
@@ -80,14 +80,14 @@ export class CurrencyMaskDirective implements AfterViewInit, ControlValueAccesso
   }
 
   // On Change remove all symbols except last . and set to currency format
-  @HostListener('change', ['$event.target.value'])
+  @HostListener("change", ["$event.target.value"])
   onChange(value) {
     this.el.value = this.currencyMaskService.transform(value, this.allowNegative);
     this.onChangeCallback(this.currencyMaskService.parse(this.el.value, this.allowNegative));
   }
 
   // Prevent user to enter anything but digits and decimal separator
-  @HostListener('keypress', ['$event'])
+  @HostListener("keypress", ["$event"])
   onKeyPress(event) {
     const key = event.which || event.keyCode || 0;
     if (key === 45 && !this.allowNegative) {

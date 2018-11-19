@@ -1,0 +1,17 @@
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex {
+  display: flex;
+}
+
+.main {
+  margin: 0 calc(50% - 250px);
+  min-height: fit-content;
+}
+
+.fill {
+  width: 100%;
+}

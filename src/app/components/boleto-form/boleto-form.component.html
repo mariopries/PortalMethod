@@ -1,3 +1,13 @@
-<p>
-  boleto-form works!
-</p>
+<div class="col flex main fill">
+  <form class="fill" [formGroup]="boleto">
+    <mat-form-field appearance="outline">
+      <mat-label>Primeiro Nome</mat-label> <input appUppercase formControlName="firstName" matInput placeholder="Primeiro Nome" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Sobrenome</mat-label> <input appUppercase formControlName="lastName" matInput placeholder="Sobrenome" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>CPF</mat-label> <input maxlength="14" appCpf formControlName="taxpayerId" matInput placeholder="CPF" />
+    </mat-form-field>
+  </form>
+</div>

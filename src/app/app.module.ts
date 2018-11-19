@@ -31,8 +31,20 @@ import { CartaoCreditoFormComponent } from './components/cartao-credito-form/car
 import { CartaoCreditoComponent } from './components/cartao-credito/cartao-credito.component';
 import { ProdutoCheckoutComponent } from "./components/produto-checkout/produto-checkout.component";
 import { BoletoFormComponent } from './components/boleto-form/boleto-form.component';
+import { CpfPipe } from './pipes/cpf.pipe';
+import { CpfDirective } from './directives/cpf.directive';
+import { ListaProdutosComponent } from './components/lista-produtos/lista-produtos.component';
+import { isMobileDevice } from "./util/functions";
+import { CnpjPipe } from './pipes/cnpj.pipe';
+import { CepPipe } from './pipes/cep.pipe';
+import { TelefonePipe } from './pipes/telefone.pipe';
 
 export let Client: HttpClient;
+
+export let isMobile = {
+  device: isMobileDevice(),
+  small: false
+};
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -56,7 +68,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CartaoCreditoFormComponent,
     CartaoCreditoComponent,
     ProdutoCheckoutComponent,
-    BoletoFormComponent
+    BoletoFormComponent,
+    CpfPipe,
+    CpfDirective,
+    ListaProdutosComponent,
+    CnpjPipe,
+    CepPipe,
+    TelefonePipe
   ],
   imports: [
     RouterModule.forRoot(
@@ -91,7 +109,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     { provide: HTTP_INTERCEPTORS, useClass: ZoopErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ZoopHeaderInterceptor, multi: true },
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
-    CurrencyPipe
+    CurrencyPipe,
+    CpfPipe,
+    TelefonePipe,
+    CnpjPipe
   ],
   bootstrap: [AppComponent],
   entryComponents: [BasePopupComponent]

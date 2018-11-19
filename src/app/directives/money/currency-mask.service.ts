@@ -28,14 +28,11 @@ export class CurrencyMaskService {
     let [integer, fraction = ''] = (value).toString().split('.');
     fraction = this.decimalPrecision > 0 ? this.decimalSeparator + (fraction + '000000').substring(0, this.decimalPrecision) : '';
     integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, this.thousandsSeparator);
-    // If user types .xx we can display 0.xx
     if (integer === '') {
       integer = '0';
     } else if (integer.startsWith(this.prefix)) {
-      // If there are multiple transforms, remove the previous dollar sign (blur and change at the same time)
       integer = integer.substr(3, integer.length);
     } else if (allowNegative && integer.startsWith('-')) {
-      // If user inputs negative number set to paranthesis format
       integer = integer.substr(1, integer.length);
       if (hasPrefix) {
         return '(' + this.prefix + integer + fraction + ')';
@@ -75,14 +72,11 @@ export class CurrencyMaskService {
     let [integer, fraction = ''] = (value).toString().split('.');
     fraction = this.decimalPrecision > 0 ? this.decimalSeparator + (fraction + '000000').substring(0, this.decimalPrecision) : '';
     integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, this.thousandsSeparator);
-    // If user types .xx we can display 0.xx
     if (integer === '') {
       integer = '0';
     } else if (integer.startsWith(this.prefix)) {
-      // If there are multiple transforms, remove the previous dollar sign (blur and change at the same time)
       integer = integer.substr(3, integer.length);
     } else if (allowNegative && integer.startsWith('-')) {
-      // If user inputs negative number set to paranthesis format
       integer = integer.substr(1, integer.length);
       return `(<p style="text-align:left;">${this.prefix}<span style="float:right;">${integer + fraction}</span></p>)`;
     }

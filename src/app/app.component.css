@@ -1,9 +1,10 @@
 body {
-  background-color: rgb(242, 244, 245);
+  background-color: rgb(232, 255, 232);
   height: 100%;
 }
 .content {
   top: 64px;
   position: relative;
   height: calc(100% - 64px);
+  background-color: rgb(232, 255, 232);
 }

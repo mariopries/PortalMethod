@@ -1,0 +1,20 @@
+  <div class="picture"><img src="./assets/full_logo.svg" /></div>
+  <div class="row top-row" style="justify-content: space-between">
+    <div class="left"><p style="margin: 0">Descrição</p></div>
+    <div class="right"><p style="margin: 0">Valor</p></div>
+  </div>
+  <perfect-scrollbar>
+    <div class="margin-5px"><app-produto-checkout *ngFor="let item of produtos" [produto]="item"> </app-produto-checkout></div>
+    <div class="after"></div>
+  </perfect-scrollbar>
+  <hr />
+  <div class="total">
+    <p class="row">
+      <span class="line">
+        <span class="col left"><strong>Total:</strong></span>
+        <span class="col right"
+          ><strong>{{ precoTotal | money }}</strong></span
+        >
+      </span>
+    </p>
+  </div>
