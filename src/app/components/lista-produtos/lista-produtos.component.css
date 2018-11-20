@@ -71,3 +71,16 @@
 .col {
   min-height: fit-content;
 }
+
+.flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.center {
+  justify-content: center;
+  text-align: center;
+}

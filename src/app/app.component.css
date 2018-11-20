@@ -3,7 +3,7 @@ body {
   height: 100%;
 }
 .content {
-  top: 64px;
+  top: 44px;
   position: relative;
   height: calc(100% - 64px);
   background-color: rgb(232, 255, 232);

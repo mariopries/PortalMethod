@@ -19,6 +19,10 @@ export function formatCnpj(value: string): string {
   )}/${value.substr(8, 4)}-${value.substr(12, 2)}`;
 }
 
+export function isArray(o) {
+  return Object.prototype.toString.apply(o) === "[object Array]";
+}
+
 export function formatCpf(value: string): string {
   return `${value.substr(0, 3)}.${value.substr(3, 3)}.${value.substr(
     6,
@@ -80,8 +84,10 @@ export function validaCPF(cpf: string): boolean {
 
   let resto = ( total * 10 ) % 11;
 
+  // console.log(total, resto);
+
   if (!(digitos[9] === resto)) {
-    console.log('deu errado 1');
+    // console.log('deu errado 1');
     return false;
   }
 
@@ -102,12 +108,16 @@ export function validaCPF(cpf: string): boolean {
 
   resto = ( total * 10 ) % 11;
 
+  // console.log(total, resto);
+
   if (!(digitos[10] === resto)) {
-    console.log('deu errado 2');
-    return false;
+    if (!( digitos[10] === 0 && resto === 10)) {
+      // console.log('074.002.219-90');
+      return false;
+    }
   }
 
-  console.log('deu certo');
+  // console.log('deu certo');
 
   return true;
 

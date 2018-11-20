@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Mock } from 'src/app/services/mock-data.service';
 
 @Component({
   selector: 'app-lista-produtos',
@@ -7,32 +8,33 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ListaProdutosComponent implements OnInit {
   @Input()
-  produtos = new Array<{
-    name: string;
-    preco: number;
-    quantidade: number;
-  }>();
+  produtos = Mock.Produtos(10);
   public precoTotal = 0;
 
   constructor() { }
 
   ngOnInit() {
-    this.produtos.push({
-    name: "Palito de bambu 4x10cm sabor menta",
-    preco: Math.random() * 10,
-    quantidade: Math.floor(Math.random() * 100)
-  });
-  for (let index = 0; index < 30; index++) {
-    this.produtos.push({
-      name: this.getName(),
-      preco: Math.random() * 10,
-      quantidade: Math.floor(Math.random() * 100)
-    });
-  }
     let resultado = 0;
     this.produtos.forEach(produto => {
-      resultado += produto.preco * 100 * produto.quantidade;
+      resultado += produto.Total * 100;
     });
+
+  //   this.produtos.push({
+  //   name: "Palito de bambu 4x10cm sabor menta",
+  //   preco: Math.random() * 10,
+  //   quantidade: Math.floor(Math.random() * 100)
+  // });
+  // for (let index = 0; index < 30; index++) {
+  //   this.produtos.push({
+  //     name: this.getName(),
+  //     preco: Math.random() * 10,
+  //     quantidade: Math.floor(Math.random() * 100)
+  //   });
+  // }
+  //   let resultado = 0;
+  //   this.produtos.forEach(produto => {
+  //     resultado += produto.preco * 100 * produto.quantidade;
+  //   });
     this.precoTotal = resultado;
   }
   public getName() {

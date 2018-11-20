@@ -23,12 +23,17 @@
     "@angular/platform-browser": "^7.0.3",
     "@angular/platform-browser-dynamic": "^7.0.3",
     "@angular/router": "^7.0.3",
+    "@types/xml2js": "^0.4.3",
     "core-js": "^2.5.4",
     "credit-card-type": "^8.0.0",
     "hammerjs": "^2.0.8",
+    "jsonxml": "^1.0.0",
     "ngx-card": "^0.2.4",
     "ngx-perfect-scrollbar": "^7.0.0",
     "rxjs": "~6.3.3",
+    "ts-md5": "^1.2.4",
+    "xml-js": "^1.6.8",
+    "xml2js": "^0.4.19",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   public screenHeight: number;
   public screenWidth: number;
   public hasSideMenu = this.screenWidth < 1004;
+  public isMobile = isMobile;
 
   constructor() {
     this.onResize();

@@ -1,11 +1,11 @@
 .example-container {
   display: flex;
   flex-direction: column;
-  margin: 0 calc(50% - 250px);
+  margin: 0 calc(50% - 200px);
 }
 
 .example-container > * {
-  width: 500px;
+  width: 400px;
 }
 
 .total {
@@ -24,6 +24,11 @@
   flex-shrink: 2;
   align-items: stretch;
   overflow: auto;
+}
+
+.mobile {
+  min-width: unset;
+  max-width: 80%;
 }
 
 .picture {
@@ -67,7 +72,7 @@
 }
 
 .imagem {
-  min-height: 200px;
+  min-height: fit-content;
   cursor: pointer;
 }
 
@@ -92,6 +97,14 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.row-mobile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   flex-wrap: nowrap;
   align-items: center;
 }

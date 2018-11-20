@@ -1,6 +1,6 @@
-<div class="row" style="height: 100%; width: 100%;">
+<div style="height: 100%; width: 100%;" [ngClass]=" isMobile.small ? 'row-mobile' : 'row' ">
   <app-loading #loading></app-loading>
-  <mat-card class="info-principal">
+  <mat-card [ngClass]=" isMobile.small ? 'info-principal mobile' : 'info-principal'" >
     <mat-card-header>
       <mat-card-actions style="width: 100%" [align]="'left'">
         <div class="linha">
@@ -9,7 +9,7 @@
           </div>
           <div class="coluna-titulo">
             <strong>
-              <h1>{{ titulo }}</h1>
+              <h1 [ngStyle]="{'font-size.em': isMobile.small ? 1.3 : 2}">{{ titulo }}</h1>
             </strong>
           </div>
         </div>
@@ -19,11 +19,11 @@
       <div class="row selection" *ngIf="!pagamentoSelecionado" style="display: flex; align-content: space-evenly;width: 100%;">
         <div style="display: flex; align-items: center;">
           <mat-card class="imagem" (click)="initCard()">
-            <div class="img"><img src="./assets/cartao.svg" height="200px" /></div>
+            <div class="img"><img src="./assets/cartao.svg" [height]="isMobile.small ? 100 : 150" /></div>
           </mat-card>
         </div>
         <div style="display: flex; align-items: center;">
-          <mat-card class="imagem" (click)="initBoleto()"> <img src="./assets/boleto.svg" height="200px" /> </mat-card>
+          <mat-card class="imagem" (click)="initBoleto()"> <img src="./assets/boleto.svg" [height]="isMobile.small ? 100 : 150" /> </mat-card>
         </div>
       </div>
       <app-cartao-credito-form *ngIf="pagamentoSelecionado && pagamentoSelecionado === 'cartao'" [cartaoCredito]="cartaoCredito"></app-cartao-credito-form>

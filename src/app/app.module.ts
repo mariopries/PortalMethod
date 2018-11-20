@@ -1,4 +1,4 @@
-import { MatFormFieldModule, MatSelectModule, MatInputModule, MatCardModule, MatDialogModule, MatProgressSpinnerModule, MatDividerModule, MatStepperModule, MatMenuModule } from "@angular/material/";
+import { MatFormFieldModule, MatSelectModule, MatInputModule, MatCardModule, MatDialogModule, MatProgressSpinnerModule, MatDividerModule, MatStepperModule, MatMenuModule, MatBadgeModule } from "@angular/material/";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from "@angular/common/http";
@@ -39,6 +39,8 @@ import { CnpjPipe } from './pipes/cnpj.pipe';
 import { CepPipe } from './pipes/cep.pipe';
 import { TelefonePipe } from './pipes/telefone.pipe';
 import { CustomValidator } from "./modules/custom-validator/custom-validator.module";
+import { CdkStepperModule } from "@angular/cdk/stepper";
+import { StepperComponent } from './components/stepper/stepper.component';
 
 export let Client: HttpClient;
 
@@ -75,7 +77,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ListaProdutosComponent,
     CnpjPipe,
     CepPipe,
-    TelefonePipe
+    TelefonePipe,
+    StepperComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -105,7 +108,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatStepperModule,
     MatIconModule,
     MatMenuModule,
-    CustomValidator
+    CustomValidator,
+    MatBadgeModule,
+    CdkStepperModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ZoopErrorInterceptor, multi: true },

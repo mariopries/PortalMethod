@@ -1,27 +1,8 @@
-import { CustomValidator } from "./../../modules/custom-validator/custom-validator.module";
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-  NgModule,
-  Input
-} from "@angular/core";
-import {
-  Form,
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormControl,
-  FormGroupDirective,
-  NgForm,
-  ValidatorFn,
-  AbstractControl
-} from "@angular/forms";
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { AbstractControl, Form, FormBuilder, FormControl, FormGroup, ValidatorFn } from "@angular/forms";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { NgxCard } from "ngx-card/card";
-import { ICardJS } from "src/app/cardJS/interfaces/card.cardjs.model";
+import { isMobile } from "src/app/app.module";
 import { BasePopupComponent } from "src/app/components/base-popup/base-popup.component";
 import { LoadingComponent } from "src/app/components/loading/loading.component";
 import { Token } from "src/app/zoop/class/token/token.class";
@@ -30,9 +11,8 @@ import { ICartaoNaoPresente } from "src/app/zoop/class/transacao/models/cartao_n
 import { Transacao } from "src/app/zoop/class/transacao/transacao.class";
 import { ETransacaoMode } from "src/app/zoop/enums/transacao.mode.enum";
 import { ETransacaoPaymentType } from "src/app/zoop/enums/transacao.payment-type.enum";
-import { isMobile } from "src/app/app.module";
-import { validaCPF } from "src/app/util/functions";
-import { CpfPipe } from "src/app/pipes/cpf.pipe";
+import { CustomValidator } from "./../../modules/custom-validator/custom-validator.module";
+import { Mock } from "src/app/services/mock-data.service";
 // import * as Card from "../../cardJS/card";
 
 declare var card: any;
@@ -50,7 +30,7 @@ export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
   templateUrl: "./developer-menu.component.html",
   styleUrls: ["./developer-menu.component.css"]
 })
-export class DeveloperMenuComponent implements OnInit, AfterViewInit {
+export class DeveloperMenuComponent implements OnInit {
   @ViewChild("loading") loading: LoadingComponent;
   @ViewChild("form") form: ElementRef<Form>;
   public pagamentoSelecionado: string = null;
@@ -63,11 +43,7 @@ export class DeveloperMenuComponent implements OnInit, AfterViewInit {
   public firstRegister: FormGroup;
   public botaoEnabled = true;
   public titulo = "Selecione a forma de Pagamento";
-  public produtos = new Array<{
-    name: string;
-    preco: number;
-    quantidade: number;
-  }>();
+  public produtos = Mock.Produtos(10);
   public isMobile = isMobile;
   public boleto: FormGroup;
   constructor(fb: FormBuilder, private alert: MatDialog) {
@@ -93,19 +69,6 @@ export class DeveloperMenuComponent implements OnInit, AfterViewInit {
     this.loading.doneLoading();
   }
 
-  ngAfterViewInit(): void {
-    // this.initCard();
-    // console.log(Card);
-    // const card = new Card(<ICardJS>{
-    //   form: "form",
-    //   container: ".card-container",
-    //   debug: true,
-    //   formSelectors: {
-    //     nameInput: 'input[name="first-name"], input[name="last-name"]'
-    //   }
-    // });
-  }
-
   public initBoleto() {
     this.pagamentoSelecionado = "boleto";
     this.titulo = "Preencha as informações do boleto";
@@ -114,14 +77,6 @@ export class DeveloperMenuComponent implements OnInit, AfterViewInit {
   public initCard() {
     this.pagamentoSelecionado = "cartao";
     this.titulo = "Preencha as informações do cartão";
-    // const cardTeste = new Card(<ICardJS>{
-    //   form: "#cartaoCredito",
-    //   container: ".card-container",
-    //   debug: true,
-    //   formSelectors: {
-    //     nameInput: 'input[name="first-name"], input[name="last-name"]'
-    //   }
-    // });
   }
 
   onVoltar($event) {

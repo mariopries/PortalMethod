@@ -1,21 +1,21 @@
 <div class="linha flex spread">
   <div class="coluna flex">
     <strong>
-      <p class="grande">{{ produto.name | titlecase }}</p>
+      <p class="grande">{{ produto.Descricao | titlecase }}</p>
     </strong>
     <div class="linha flex">
       <strong> <p class="pequeno">Preço:</p> </strong>&nbsp;
-      <p class="pequeno">{{ produto.preco | money }}</p>
+      <p class="pequeno">{{ produto.Valor | money }}</p>
     </div>
     <div class="linha flex">
       <strong> <p class="pequeno">Quantidade:</p> </strong>&nbsp;
-      <p class="pequeno">{{ produto.quantidade | number: "1.3-3" | numero }}</p>
+      <p class="pequeno">{{ produto.Quantidade | number: "1.3-3" | numero }} {{ produto.UnidadeMedida }}</p>
     </div>
   </div>
   <div class="coluna flex bottom-vertical total">
     <div>
       <strong>
-        <p class="grande">{{ produto.preco * produto.quantidade | money }}</p>
+        <p class="grande">{{ produto.Total | money }}</p>
       </strong>
     </div>
   </div>

@@ -1,13 +1,14 @@
 .example-container {
   display: flex;
   flex-direction: column;
-  margin: 0 calc(50% - 250px);
+  justify-content: space-around;
+  max-width: 60%;
 }
 
 .row {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: nowrap;
   align-items: stretch;
 }
@@ -22,6 +23,7 @@
 }
 form {
   display: flex;
+  justify-content: center;
 }
 
 .space {

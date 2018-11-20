@@ -15,4 +15,15 @@ mat-toolbar {
 .flex-space {
   display: flex;
   flex: 1 1;
+  justify-content: center;
+  /* padding-right: 166px; */
+}
+
+.mobile {
+  padding-left: 40px;
+}
+
+.toolbar {
+  padding-bottom: 20px;
+  /* background-color: transparent; */
 }

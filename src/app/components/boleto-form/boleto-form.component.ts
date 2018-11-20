@@ -1,7 +1,5 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
-import { CpfPipe } from "src/app/pipes/cpf.pipe";
-import { validaCPF } from "src/app/util/functions";
+import { Component, Input, OnInit } from "@angular/core";
+import { FormGroup } from "@angular/forms";
 
 @Component({
   selector: "app-boleto-form",

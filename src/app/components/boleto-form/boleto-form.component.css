@@ -8,7 +8,8 @@
 }
 
 .main {
-  margin: 0 calc(50% - 250px);
+  justify-content: space-around;
+  max-width: 60%;
   min-height: fit-content;
 }
 

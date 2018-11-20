@@ -43,6 +43,7 @@ app-cartao-credito-form {
   display: flex;
   width: 100%;
   min-height: fit-content;
+  justify-content: center;
 }
 
 app-cartao-credito {
@@ -52,6 +53,7 @@ app-cartao-credito {
 app-boleto-form {
   display: flex;
   min-height: fit-content;
+  justify-content: center;
   width: 100%;
 }
 

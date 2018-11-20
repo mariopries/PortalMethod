@@ -1,9 +1,10 @@
+<app-navbar>
+  <div class="content" [ngStyle]="{ height: 'height: calc(100% - ' + topHeight + 'px);' }"><router-outlet style="height: 100%"></router-outlet></div>
+</app-navbar>
 
-  <app-navbar>
-    <div class="content"><router-outlet style="height: 100%"></router-outlet></div>
-  </app-navbar>
-
-<!-- <app-toolbar></app-toolbar>
-<div class="content">
-  <router-outlet style="height: 100%"></router-outlet>
-</div> -->
+<!--
+  <app-toolbar></app-toolbar>
+  <div class="content">
+    <router-outlet style="height: 100%"></router-outlet>
+  </div>
+-->

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { ICardJS } from "src/app/cardJS/interfaces/card.cardjs.model";
+import { isMobile } from "src/app/app.module";
 
 declare var Card: any;
 
@@ -24,7 +25,8 @@ export class CartaoCreditoFormComponent implements OnInit, AfterViewInit {
       debug: true,
       formSelectors: {
         nameInput: 'input[name="first-name"], input[name="last-name"]'
-      }
+      },
+      width: isMobile.small ? 250 : 350
     });
   }
 }

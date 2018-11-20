@@ -1,15 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav"
-      fixedInViewport="true"
-      [mode]="'over'"
-      [opened]="false"
-      [position]="'end'">
-      <div class="lista-container">
-        <app-lista-produtos></app-lista-produtos>
-      </div>
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [mode]="'over'" [opened]="false" [position]="'end'">
+    <div class="lista-container" (swiperight)="isMobile.device ? drawer.close() : null"><app-lista-produtos></app-lista-produtos></div>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <app-toolbar (sideMenuClick)="onClickSideMenu($event); drawer.toggle()" ></app-toolbar>
+  <mat-sidenav-content (swipeleft)="isMobile.device ? drawer.open() : null" >
+    <app-toolbar (sideMenuClick)="onClickSideMenu($event); drawer.toggle()"></app-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

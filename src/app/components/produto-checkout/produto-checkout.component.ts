@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Produto } from 'src/app/classes/produto.class';
 
 @Component({
   selector: 'app-produto-checkout',
@@ -7,11 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ProdutoCheckoutComponent implements OnInit {
 
-  @Input() produto: {
-    name: string,
-    preco: number,
-    quantidade: number
-  };
+  @Input() produto: Produto;
 
   constructor() { }
 
