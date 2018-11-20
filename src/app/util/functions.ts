@@ -1,3 +1,5 @@
+import { CpfPipe } from "../pipes/cpf.pipe";
+
 export function isString(value: any): boolean {
   return typeof value === "string";
 }
@@ -11,11 +13,17 @@ export function removeNonDigits(value: string): string {
 }
 
 export function formatCnpj(value: string): string {
-  return `${value.substr(0, 2)}.${value.substr(2, 3)}.${value.substr(5, 3)}/${value.substr(8, 4)}-${value.substr(12, 2)}`;
+  return `${value.substr(0, 2)}.${value.substr(2, 3)}.${value.substr(
+    5,
+    3
+  )}/${value.substr(8, 4)}-${value.substr(12, 2)}`;
 }
 
 export function formatCpf(value: string): string {
-  return `${value.substr(0, 3)}.${value.substr(3, 3)}.${value.substr(6, 3)}-${value.substr(9, 2)}`;
+  return `${value.substr(0, 3)}.${value.substr(3, 3)}.${value.substr(
+    6,
+    3
+  )}-${value.substr(9, 2)}`;
 }
 
 export function isMobileDevice(): boolean {
@@ -33,4 +41,115 @@ export function isMobileDevice(): boolean {
     }
   })(navigator.userAgent || navigator.vendor);
   return check;
+}
+
+export function validaCPF(cpf: string): boolean {
+  if (!cpf) {
+    return null;
+  }
+
+  cpf = CpfPipe.prototype.parse(cpf);
+
+  const digitosAsString = cpf.split("");
+
+  const digitos = digitosAsString.map(value => Number.parseInt(value, 10));
+
+  if (digitos.every((value, index) => {
+    if (value === digitos[index + 1] || value === digitos[index - 1]) {
+      return true;
+    }
+    return false;
+  })) {
+    return false;
+  }
+
+  const novePrimeiros = digitos.filter((v, i) => {
+    if (i < 9) {
+      return true;
+    }
+    return false;
+  });
+
+  let total = 0;
+  let multiplicador = 10;
+
+  novePrimeiros.forEach(value => {
+    total += value * multiplicador;
+    multiplicador--;
+  });
+
+  let resto = ( total * 10 ) % 11;
+
+  if (!(digitos[9] === resto)) {
+    console.log('deu errado 1');
+    return false;
+  }
+
+  const dezPrimeiros = digitos.filter((v, i) => {
+    if (i < 10) {
+      return true;
+    }
+    return false;
+  });
+
+  total = 0;
+  multiplicador = 11;
+
+  dezPrimeiros.forEach(value => {
+    total += value * multiplicador;
+    multiplicador--;
+  });
+
+  resto = ( total * 10 ) % 11;
+
+  if (!(digitos[10] === resto)) {
+    console.log('deu errado 2');
+    return false;
+  }
+
+  console.log('deu certo');
+
+  return true;
+
+}
+
+export function validaCNPJ(cnpj: string): boolean {
+  let i;
+  const c = cnpj.substr(0, 12);
+  const dv = cnpj.substr(12, 2);
+  let d1 = 0;
+
+  for (i = 0; i < 12; i++) {
+    d1 += Number.parseInt(c.charAt(11 - i), 10) * (2 + (i % 8));
+  }
+
+  if (d1 === 0) {
+    return false;
+  }
+
+  d1 = 11 - (d1 % 11);
+
+  if (d1 > 9) {
+    d1 = 0;
+  }
+  if (Number.parseInt(dv.charAt(0), 10) !== d1) {
+    return false;
+  }
+
+  d1 *= 2;
+
+  for (i = 0; i < 12; i++) {
+    d1 += Number.parseInt(c.charAt(11 - i), 10) * (2 + ((i + 1) % 8));
+  }
+
+  d1 = 11 - (d1 % 11);
+
+  if (d1 > 9) {
+    d1 = 0;
+  }
+  if (Number.parseInt(dv.charAt(1), 10) !== d1) {
+    return false;
+  }
+
+  return true;
 }

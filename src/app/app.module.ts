@@ -17,7 +17,7 @@ import { ZoopHeaderInterceptor } from "./zoop/services/zoop-header-interceptor.s
 import { ZoopErrorInterceptor } from "./zoop/services/zoop-error-interceptor.service";
 import { CardModule } from "ngx-card/ngx-card";
 import { TesteFormComponent } from "./teste-form/teste-form.component";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, NG_VALIDATORS } from "@angular/forms";
 import { VendedoresComponent } from "./telas/vendedores/vendedores.component";
 import { HomeComponent } from "./telas/home/home.component";
 import { UppercaseDirective } from "./directives/uppercase.directive";
@@ -38,6 +38,7 @@ import { isMobileDevice } from "./util/functions";
 import { CnpjPipe } from './pipes/cnpj.pipe';
 import { CepPipe } from './pipes/cep.pipe';
 import { TelefonePipe } from './pipes/telefone.pipe';
+import { CustomValidator } from "./modules/custom-validator/custom-validator.module";
 
 export let Client: HttpClient;
 
@@ -104,6 +105,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatStepperModule,
     MatIconModule,
     MatMenuModule,
+    CustomValidator
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ZoopErrorInterceptor, multi: true },
@@ -112,7 +114,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CurrencyPipe,
     CpfPipe,
     TelefonePipe,
-    CnpjPipe
+    CnpjPipe,
+    { provide: NG_VALIDATORS, useExisting: CustomValidator.cpfValido, multi: true }
   ],
   bootstrap: [AppComponent],
   entryComponents: [BasePopupComponent]

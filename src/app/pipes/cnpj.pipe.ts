@@ -5,6 +5,9 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 export class CnpjPipe implements PipeTransform {
   transform(value: any): any {
+    if (!value) {
+      return null;
+    }
     value = value.replace(/\D/g, "");
     value = value.replace(/^(\d{2})(\d)/, "$1.$2");
     value = value.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");

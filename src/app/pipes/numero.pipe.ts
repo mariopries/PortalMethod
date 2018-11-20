@@ -5,6 +5,9 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 export class NumeroPipe implements PipeTransform {
   transform(value: string | number, args?: any): any {
+    if (!value) {
+      return null;
+    }
     if (typeof value === "string") {
       value = value.replace(",", "");
       value = value.replace(".", ",");

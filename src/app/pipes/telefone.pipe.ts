@@ -5,6 +5,9 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 export class TelefonePipe implements PipeTransform {
   transform(value: any, args?: any): any {
+    if (!value) {
+      return null;
+    }
     value = value.replace(/\D/g, "");
     value = value.replace(/^(\d)/, "($1");
     value = value.replace(/(.{3})(\d)/, "$1)$2");

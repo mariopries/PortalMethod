@@ -15,3 +15,9 @@
 .fill {
   width: 100%;
 }
+
+mat-error {
+  background-color: white;
+  width: fit-content;
+  padding: 0 5px 0 0;
+}

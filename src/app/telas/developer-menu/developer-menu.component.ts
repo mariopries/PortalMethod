@@ -1,5 +1,24 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, NgModule, Input } from "@angular/core";
-import { Form, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { CustomValidator } from "./../../modules/custom-validator/custom-validator.module";
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  NgModule,
+  Input
+} from "@angular/core";
+import {
+  Form,
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl,
+  FormGroupDirective,
+  NgForm,
+  ValidatorFn,
+  AbstractControl
+} from "@angular/forms";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { NgxCard } from "ngx-card/card";
 import { ICardJS } from "src/app/cardJS/interfaces/card.cardjs.model";
@@ -12,10 +31,19 @@ import { Transacao } from "src/app/zoop/class/transacao/transacao.class";
 import { ETransacaoMode } from "src/app/zoop/enums/transacao.mode.enum";
 import { ETransacaoPaymentType } from "src/app/zoop/enums/transacao.payment-type.enum";
 import { isMobile } from "src/app/app.module";
+import { validaCPF } from "src/app/util/functions";
+import { CpfPipe } from "src/app/pipes/cpf.pipe";
 // import * as Card from "../../cardJS/card";
 
 declare var card: any;
 declare var Card: any;
+
+export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const forbidden = nameRe.test(control.value);
+    return forbidden ? { forbiddenName: { value: control.value } } : null;
+  };
+}
 
 @Component({
   selector: "app-developer-menu",
@@ -50,10 +78,14 @@ export class DeveloperMenuComponent implements OnInit, AfterViewInit {
       cardExpiry: null,
       cardCVC: null
     });
-    this.boleto = fb.group({
-      firstName: "",
-      lastName: "",
-      taxpayerId: ""
+    this.boleto = new FormGroup({
+      firstName: new FormControl(""),
+      lastName: new FormControl(""),
+      taxpayerId: new FormControl("", [
+        CustomValidator.cpfValido()
+      ])
+    }, {
+      updateOn: 'blur'
     });
   }
 
@@ -98,16 +130,29 @@ export class DeveloperMenuComponent implements OnInit, AfterViewInit {
   }
 
   public async onEnviar($event) {
-    if (this.cartaoCredito && this.cartaoCredito.enabled && this.pagamentoSelecionado === "cartao") {
+    if (
+      this.cartaoCredito &&
+      this.cartaoCredito.enabled &&
+      this.pagamentoSelecionado === "cartao"
+    ) {
       try {
         this.loading.startLoading();
         this.cartaoCredito.disable();
         this.botaoEnabled = false;
         const cartao = <ICard>{
           card_number: this.cartaoCredito.controls["cardNumber"].value,
-          expiration_month: this.cartaoCredito.controls["cardExpiry"].value.substr(0, 2),
-          expiration_year: this.cartaoCredito.controls["cardExpiry"].value.substr(this.cartaoCredito.controls["cardExpiry"].value.length - 2, this.cartaoCredito.controls["cardExpiry"].value.length),
-          holder_name: `${this.cartaoCredito.controls["cardFirstName"].value} ${this.cartaoCredito.controls["cardLastName"].value}`,
+          expiration_month: this.cartaoCredito.controls[
+            "cardExpiry"
+          ].value.substr(0, 2),
+          expiration_year: this.cartaoCredito.controls[
+            "cardExpiry"
+          ].value.substr(
+            this.cartaoCredito.controls["cardExpiry"].value.length - 2,
+            this.cartaoCredito.controls["cardExpiry"].value.length
+          ),
+          holder_name: `${this.cartaoCredito.controls["cardFirstName"].value} ${
+            this.cartaoCredito.controls["cardLastName"].value
+          }`,
           security_code: this.cartaoCredito.controls["cardCVC"].value
         };
         const tokenCartao = await Token.CriarTokenCartao(cartao).toPromise();
@@ -123,9 +168,14 @@ export class DeveloperMenuComponent implements OnInit, AfterViewInit {
             number_installments: 6
           }
         };
-        const result = await Transacao.CriarCartaoNaoPresente(transacao).toPromise();
+        const result = await Transacao.CriarCartaoNaoPresente(
+          transacao
+        ).toPromise();
         this.loading.doneLoading();
-        this.OpenAlert(`Transação número ${result.transaction_number}`, `Aprovada com sucesso!`);
+        this.OpenAlert(
+          `Transação número ${result.transaction_number}`,
+          `Aprovada com sucesso!`
+        );
         this.alert.afterAllClosed.subscribe(() => {
           this.cartaoCredito.reset();
           this.cartaoCredito.updateValueAndValidity();
@@ -139,7 +189,11 @@ export class DeveloperMenuComponent implements OnInit, AfterViewInit {
         this.cartaoCredito.enable();
         this.botaoEnabled = true;
       }
-    } else if (this.boleto && this.boleto.enabled && this.pagamentoSelecionado === "boleto") {
+    } else if (
+      this.boleto &&
+      this.boleto.enabled &&
+      this.pagamentoSelecionado === "boleto"
+    ) {
       this.OpenAlert("Erro", "Não implementado");
     } else {
       this.OpenAlert("Erro", "Não implementado");
@@ -147,10 +201,18 @@ export class DeveloperMenuComponent implements OnInit, AfterViewInit {
   }
 
   public onCancelar($event) {
-    if (this.cartaoCredito && !this.cartaoCredito.enabled && this.pagamentoSelecionado === "cartao") {
+    if (
+      this.cartaoCredito &&
+      !this.cartaoCredito.enabled &&
+      this.pagamentoSelecionado === "cartao"
+    ) {
       this.cartaoCredito.reset();
       this.cartaoCredito.enable();
-    } else if (this.boleto && this.boleto.enabled && this.pagamentoSelecionado === "boleto") {
+    } else if (
+      this.boleto &&
+      this.boleto.enabled &&
+      this.pagamentoSelecionado === "boleto"
+    ) {
       this.OpenAlert("Erro", "Não implementado");
     } else {
       this.OpenAlert("Erro", "Não implementado");
