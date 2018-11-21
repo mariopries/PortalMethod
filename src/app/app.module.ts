@@ -41,6 +41,7 @@ import { TelefonePipe } from './pipes/telefone.pipe';
 import { CustomValidator } from "./modules/custom-validator/custom-validator.module";
 import { CdkStepperModule } from "@angular/cdk/stepper";
 import { StepperComponent } from './components/stepper/stepper.component';
+import { EnterDirective } from './directives/enter.directive';
 
 export let Client: HttpClient;
 
@@ -78,7 +79,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CnpjPipe,
     CepPipe,
     TelefonePipe,
-    StepperComponent
+    StepperComponent,
+    EnterDirective
   ],
   imports: [
     RouterModule.forRoot(

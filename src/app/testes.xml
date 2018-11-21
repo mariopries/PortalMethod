@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<pedido>
+  <numero>161273</numero>
+  <empresa>
+    <codigo/>
+    <razaosocial>METHOD INFORMÃTICA CORPORATION LTDA</razaosocial>
+  </empresa>
+  <cliente>
+    <documento>93209765026850</documento>
+    <nome>PARANÃ AVIAMENTOS E RESTAURANTE LIMITADO - COMPANY</nome>
+    <email>thiago.falcao@methodinformatica.com.br</email>
+    <cep>89206100</cep>
+    <endereco>RUA PREFEITO HELMUTH FALLGATTER</endereco>
+    <numero>2301</numero>
+    <bairro>BOA VISTA</bairro>
+    <cidade>JOINVILLE</cidade>
+    <estado>SC</estado>
+  </cliente>
+  <data>20/11/18</data>
+  <dataexpira>21/11/18</dataexpira>
+  <frete>0,00</frete>
+  <desconto>0,00</desconto>
+  <item id="1">
+    <codigo>A</codigo>
+    <descricao>A</descricao>
+    <um>M3</um>
+    <quantidade>10,0000</quantidade>
+    <unitario>91,00000</unitario>
+    <total>910,00000</total>
+  </item>
+  <item id="2">
+    <codigo>B</codigo>
+    <descricao>B</descricao>
+    <um>CX</um>
+    <quantidade>10,0000</quantidade>
+    <unitario>41,00000</unitario>
+    <total>410,00000</total>
+  </item>
+</pedido>

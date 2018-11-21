@@ -27,11 +27,11 @@
         </div>
       </div>
       <app-cartao-credito-form *ngIf="pagamentoSelecionado && pagamentoSelecionado === 'cartao'" [cartaoCredito]="cartaoCredito"></app-cartao-credito-form>
-      <app-boleto-form *ngIf="pagamentoSelecionado && pagamentoSelecionado === 'boleto'" [boleto]="boleto"> </app-boleto-form>
+      <app-boleto-form (keydown.enter)="onEnviar($event)" *ngIf="pagamentoSelecionado && pagamentoSelecionado === 'boleto'" [boleto]="boleto" (envio)="onEnviar($event)" > </app-boleto-form>
       <div class="middle-col" *ngIf="pagamentoSelecionado" style="width: 100%;">
         <div class="row">
           <div class="buttons">
-            <button [disabled]="!botaoEnabled" (click)="onEnviar($event)" mat-raised-button color="primary">Enviar</button>
+            <button [disabled]="!botaoEnabled || !( pagamentoSelecionado === 'cartao' ? cartaoCredito.valid : boleto.valid )" (click)="onEnviar($event)" mat-raised-button color="primary">Enviar</button>
             <button (click)="onCancelar($event)" mat-raised-button color="warn">Cancelar</button>
           </div>
         </div>

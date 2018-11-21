@@ -1,14 +1,32 @@
 <div class="col flex main fill">
-  <form class="fill flex col" [formGroup]="boleto">
+  <form class="fill flex col" [formGroup]="boleto" appEnter >
     <mat-form-field appearance="outline">
       <mat-label>Primeiro Nome</mat-label> <input appUppercase formControlName="firstName" matInput placeholder="Primeiro Nome" />
+      <mat-error>Nome Inválido</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Sobrenome</mat-label> <input appUppercase formControlName="lastName" matInput placeholder="Sobrenome" />
+      <mat-error>Sobrenome Inválido</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>CPF</mat-label> <input maxlength="14" appCpf formControlName="taxpayerId" matInput placeholder="CPF" />
+      <mat-label>CPF</mat-label> <input type="tel" maxlength="14" appCpf formControlName="taxpayerId" matInput placeholder="CPF" />
       <mat-error>CPF Inválido</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Endereço</mat-label> <input maxlength="14" appCpf formControlName="address" matInput placeholder="Endereço" />
+      <mat-error>Campo Obrigatório</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Bairro</mat-label> <input maxlength="14" appCpf formControlName="neighborhood" matInput placeholder="Bairro" />
+      <mat-error>Campo Obrigatório</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Cidade</mat-label> <input maxlength="14" appCpf formControlName="city" matInput placeholder="Cidade" />
+      <mat-error>Campo Obrigatório</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Estado</mat-label> <input maxlength="14" appCpf formControlName="state" matInput placeholder="Estado" />
+      <mat-error>Campo Obrigatório</mat-error>
     </mat-form-field>
   </form>
 </div>

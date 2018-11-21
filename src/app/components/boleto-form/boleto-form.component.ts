@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, EventEmitter, Output } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
 @Component({
@@ -9,9 +9,16 @@ import { FormGroup } from "@angular/forms";
 export class BoletoFormComponent implements OnInit {
   @Input()
   boleto: FormGroup;
+  @Output()
+  envio = new EventEmitter();
 
   constructor() {}
 
   ngOnInit() {
+  }
+
+  onSubmit($event) {
+    $event.preventDefault();
+    this.envio.emit($event);
   }
 }

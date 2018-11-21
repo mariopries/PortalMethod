@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { AbstractControl, Form, FormBuilder, FormControl, FormGroup, ValidatorFn } from "@angular/forms";
+import { AbstractControl, Form, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from "@angular/forms";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { NgxCard } from "ngx-card/card";
 import { isMobile } from "src/app/app.module";
@@ -13,6 +13,13 @@ import { ETransacaoMode } from "src/app/zoop/enums/transacao.mode.enum";
 import { ETransacaoPaymentType } from "src/app/zoop/enums/transacao.payment-type.enum";
 import { CustomValidator } from "./../../modules/custom-validator/custom-validator.module";
 import { Mock } from "src/app/services/mock-data.service";
+import { IComprador } from "src/app/zoop/class/comprador/models/comprador.model";
+import { Comprador } from "src/app/zoop/class/comprador/comprador.class";
+import { ITransacao } from "src/app/zoop/class/transacao/models/transacao.model";
+import { ICustomer } from "src/app/zoop/class/source/models/customer.model";
+import { MARKETPLACE_ID } from "src/app/zoop/constants/marketplace_id.constant";
+import { TitleCasePipe, UpperCasePipe } from "@angular/common";
+import { CpfPipe } from "src/app/pipes/cpf.pipe";
 // import * as Card from "../../cardJS/card";
 
 declare var card: any;
@@ -55,17 +62,28 @@ export class DeveloperMenuComponent implements OnInit {
       cardCVC: null
     });
     this.boleto = new FormGroup({
-      firstName: new FormControl(""),
-      lastName: new FormControl(""),
-      taxpayerId: new FormControl("", [
-        CustomValidator.cpfValido()
-      ])
-    }, {
-      updateOn: 'blur'
+      firstName: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      lastName: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      taxpayerId: new FormControl("", {
+        validators: [
+          CustomValidator.cpfValido(),
+          Validators.required
+        ],
+        updateOn: 'blur'
+      }),
+      address: new FormControl("", [Validators.required]),
+      neighborhood: new FormControl("", [Validators.required]),
+      city: new FormControl("", [Validators.required]),
+      state: new FormControl("", [Validators.required])
     });
   }
 
   ngOnInit() {
+    let resultado = 0;
+    this.produtos.forEach(produto => {
+      resultado += produto.Total * 100;
+    });
+    this.precoTotal = resultado;
     this.loading.doneLoading();
   }
 
@@ -88,7 +106,8 @@ export class DeveloperMenuComponent implements OnInit {
     if (
       this.cartaoCredito &&
       this.cartaoCredito.enabled &&
-      this.pagamentoSelecionado === "cartao"
+      this.pagamentoSelecionado === "cartao" &&
+      this.cartaoCredito.valid
     ) {
       try {
         this.loading.startLoading();
@@ -147,9 +166,35 @@ export class DeveloperMenuComponent implements OnInit {
     } else if (
       this.boleto &&
       this.boleto.enabled &&
-      this.pagamentoSelecionado === "boleto"
+      this.pagamentoSelecionado === "boleto" &&
+      this.boleto.valid
     ) {
-      this.OpenAlert("Erro", "Não implementado");
+
+      console.log(this.boleto.controls["taxpayerId"].value);
+
+      const parms = <IComprador>{
+        first_name: UpperCasePipe.prototype.transform(this.boleto.controls["firstName"].value),
+        last_name: UpperCasePipe.prototype.transform(this.boleto.controls["lastName"].value),
+        taxpayer_id: CpfPipe.prototype.parse(this.boleto.controls["taxpayerId"].value)
+      };
+
+      const customer = await Comprador.CriarComprador(parms).toPromise();
+
+      const boleto = <ITransacao>{
+        amount: this.precoTotal,
+        payment_type: ETransacaoPaymentType.boleto,
+        currency: "BRL",
+        on_behalf_of: "0056dcc116d04a199145308e4786454c",
+        customer: customer.id,
+        payment_method: {
+          expiration_date: "20181130",
+          top_instructions: ["Testes", "Testando 2312312"]
+        }
+      };
+      console.log(boleto);
+      const result = await Transacao.CriaTransacao(boleto).toPromise();
+      window.open(result.payment_method.url);
+      // this.OpenAlert("Erro", "Não implementado");
     } else {
       this.OpenAlert("Erro", "Não implementado");
     }

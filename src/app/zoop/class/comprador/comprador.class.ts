@@ -30,9 +30,9 @@ export class Comprador<T extends IComprador> {
   created_at:                       string;                       // Data de criação do comprador no formato (yyyy-mm-ddThh:mm:ssZ)
   updated_at:                       string;                       // Data da última atualização do comprador no formato (yyyy-mm-ddThh:mm:ssZ)
 
-  constructor(comprador?: T) { 
+  constructor(comprador?: T) {
     if (comprador) {
-      this.InicializarComprador(comprador);    
+      this.InicializarComprador(comprador);
     }
   }
 
@@ -40,14 +40,14 @@ export class Comprador<T extends IComprador> {
    * @description Criar comprador
    * @param comprador Objeto do tipo IComprador
    */
-  public CriarComprador(comprador: IComprador) {
+  public static CriarComprador(comprador: IComprador) {
     return Client.post<IComprador>(`https://api.zoop.ws/v1/marketplaces/${MARKETPLACE_ID}/buyers`, JSON.stringify(comprador));
   }
 
-  public async BuscaComprador(documento: string){
+  public static async BuscaComprador(documento: string) {
     const retorno = await Client.get<IComprador>(`https://api.zoop.ws/v1/marketplaces/${MARKETPLACE_ID}/buyers/search`);
 
-    if (!retorno){
+    if (!retorno) {
       return undefined;
     }
     return retorno;
@@ -76,5 +76,5 @@ export class Comprador<T extends IComprador> {
     this.created_at = comprador.created_at;
     this.updated_at = comprador.updated_at;
   }
-    
+
 }

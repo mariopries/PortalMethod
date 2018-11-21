@@ -18,23 +18,6 @@ export class ListaProdutosComponent implements OnInit {
     this.produtos.forEach(produto => {
       resultado += produto.Total * 100;
     });
-
-  //   this.produtos.push({
-  //   name: "Palito de bambu 4x10cm sabor menta",
-  //   preco: Math.random() * 10,
-  //   quantidade: Math.floor(Math.random() * 100)
-  // });
-  // for (let index = 0; index < 30; index++) {
-  //   this.produtos.push({
-  //     name: this.getName(),
-  //     preco: Math.random() * 10,
-  //     quantidade: Math.floor(Math.random() * 100)
-  //   });
-  // }
-  //   let resultado = 0;
-  //   this.produtos.forEach(produto => {
-  //     resultado += produto.preco * 100 * produto.quantidade;
-  //   });
     this.precoTotal = resultado;
   }
   public getName() {
